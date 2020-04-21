@@ -84,8 +84,8 @@ while True:
 			break
 		else:
 			recharge()
-	# elif input('\n是否继续游戏？继续游戏请输入“y”，退出游戏请输入“n”：') == 'n':
-		# break
+	elif input('\n是否继续游戏？继续游戏请输入“y”，退出游戏请输入“n”：') == 'n':
+		break
 
 
 
