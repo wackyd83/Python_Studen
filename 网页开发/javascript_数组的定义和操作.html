@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      // 定义数组
+      var aArray1 = new Array(1, 2, 3);
+      console.log(aArray1);
+
+      // 字面量方式创建，相当于直接赋值一个数组，数组的表现形式是一对中括号
+      var aArray2 = [3, 6, 9];
+      console.log(aArray2);
+      // 多维数组
+      var aArray3 = [aArray1, aArray2];
+      console.log(aArray3);
+      alert(aArray3[0][1]);
+      // 数组的相关操作
+      // 获取数组的长度（个数）
+      alert(aArray1.length);
+      // 根据下标取值,JS不支持负数下标
+      alert(aArray1[1]);
+      // 根据下标修改数据
+      aArray1[1] = 15;
+      console.log(aArray1);
+      // 追加数据
+      aArray1.push("hello");
+      console.log(aArray1);
+      // 删除最后一个元素，不支根据下标删除元素
+      var oValue = aArray1.pop();
+      console.log(aArray1);
+      console.log(oValue);
+      // 插入数据
+      // splice参数说明
+      // 1.开始删除的索引
+      // 2.删除的个数
+      // 3.插入的数据
+      aArray1.splice(1, 0, "苹果");
+      console.log(aArray1);
+      // 从下标2删除2个数据，并追加'西瓜'和'雪梨'
+      aArray1.splice(2, 2, "西瓜", "雪梨");
+      console.log(aArray1);
+    </script>
+  </head>
+  <body></body>
+</html>

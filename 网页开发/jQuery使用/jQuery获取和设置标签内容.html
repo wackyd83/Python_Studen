@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="../JS/jquery-1.12.4.min.js"></script>
+
+    <script>
+      $(function () {
+        // 获取标签
+        var $div = $("div");
+        // jQuery的方法获取标签内容
+        alert($div.html());
+        // 设置标签内容
+        $div.html('<a href="http://www.baidu.com">百度</a>')
+        // 扩展：追加内容
+        $div.append('<a href="http://www.baidu.com">谷歌</a>')
+
+      });
+    </script>
+  </head>
+  <body>
+    <div>哈哈哈哈哈哈哈哈哈哈或或或或或或或或</div>
+  </body>
+</html>

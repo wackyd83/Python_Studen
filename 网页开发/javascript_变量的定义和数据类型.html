@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        // 定义数字类型
+        var iNum1=1;
+        var fNum1=2.5;
+        // 定义字符串
+        var sName='张三';
+        // 定义boolean类型
+        var bIsOk=true;
+        // 定义undefind类型
+        var unData;
+        // 定义空对象
+        var oData=null;
+        // 定义对象类型
+        var oPerson= {
+            name:'李四',
+            age:20
+        }
+        // 同时定义多个变量
+        var iNum2=3,sStr='牛牛';
+        // alert(iNum1);
+        // alert(fNum1);
+        // alert(sName);
+        alert(oPerson.age);
+        // 查看数据类型使用typeof
+        alert(typeof(iNum1));
+        alert(typeof(fNum1));
+        alert(typeof(sName));
+        alert(typeof(bIsOk));
+        alert(typeof(unData));
+        // 由于JS历史原因，设计之初没有null类型，null值归属于object类型，后续JS语言迭代后也没有进行修改
+        // 只需记得null值归属于null类型
+        alert(typeof(oData));
+        alert(typeof(oPerson));
+        console.log(oPerson.name);
+        console.log(iNum2)
+        console.log(sStr)
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

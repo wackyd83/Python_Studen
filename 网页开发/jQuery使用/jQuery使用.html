@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 导入jQuery文件 -->
+    <script src="../JS/jquery-1.12.4.min.js"></script>
+
+    <!-- 编写JS代码需要重新开一个scrpit标签 -->
+    <script>
+      // 原生JS写法
+      window.onload = function () {
+        var oDiv = document.getElementById("div1");
+        alert(oDiv);
+      };
+
+      //   $符号就是jquery的象征
+      // $本质就是函数，只不过这个函数名($)
+      $(document).ready(function () {
+        // 获取标签和CSS样式匹配标签的规则一样
+        // 以后使用jquery，变量名都要以$符号开头
+        var $div = $("#div1");
+        alert($div);
+      });
+
+    //   ready等待页面标签加载完成就执行redady事件，不会等待资源数据加载完成
+    $(function(){
+        var $div=$('#div1')
+        alert($div)
+    })
+
+    // jquery的简写
+    </script>
+  </head>
+  <body>
+    <div id="div1">哈哈哈哈哈哈哈哈哈哈或或或或或或或或</div>
+  </body>
+</html>

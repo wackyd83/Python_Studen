@@ -1,0 +1,38 @@
+< !DOCTYPE html >
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      // 局部变量：在函数内定义的变量，只能在函数内使用
+      function fnShow() {
+        // 定义局部变量
+        var iNum1 = 1;
+        alert(iNum1);
+      }
+      fnShow();
+      // 局部变量不能在函数外使用
+      // alert(iNum1)
+
+      // 全局变量：在函数外定义的变量叫全局变量，可以在不同函数内使用，并且不同函数内可以共享全局变量
+      var iNum2 = 2;
+
+      function fnModify() {
+        alert(iNum2);
+        iNum2 = 7;
+        // ++等价于python的+=1
+        iNum2++;
+        iNum2 += 1;
+        // js可以数字类型与字符串类型直接相加，把数字自动转成字符串
+        alert("函数外的全局变量iNum2的值是：" + iNum2);
+      }
+
+      fnModify();
+    </script>
+  </head>
+
+  <body></body>
+</html>

@@ -1,0 +1,5 @@
+2022-02-14 10:08:09,024-logging日志.py[line:14]-DEBUG-我就是一个bug1111111111
+2022-02-14 10:08:09,024-logging日志.py[line:15]-INFO-我就是一个info
+2022-02-14 10:08:09,024-logging日志.py[line:16]-WARNING-我就是一个warning111111111
+2022-02-14 10:08:09,024-logging日志.py[line:17]-ERROR-我就是一个error
+2022-02-14 10:08:09,024-logging日志.py[line:18]-CRITICAL-我就是一个critical

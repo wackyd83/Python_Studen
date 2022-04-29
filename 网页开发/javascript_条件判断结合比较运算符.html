@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      var iNum = 5;
+      var iStr = "5";
+      // 在JS里，如果数字和字符串进行比较（==,>,<,>=,<=,!=），会自动吧字符串转成数字类型进行比较
+      if (iNum == iStr) {
+        alert("iStr等于iNum");
+      }
+
+      if (iNum != iStr) {
+        alert("条件成立");
+      } else {
+        alert("条件不成立");
+      }
+
+      var iScore = 90;
+
+      if (iScore <= 60) {
+        alert("不及格");
+      } else if (iScore <= 70) {
+        alert("及格");
+      } else if (iScore <= 80) {
+        alert("良好");
+      } else {
+        alert("优秀");
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

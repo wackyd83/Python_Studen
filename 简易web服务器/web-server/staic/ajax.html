@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="../JS/jquery-1.12.4.min.js"></script>
+
+    <script>
+      // 先web服务器发送ajax请求，本质上是一个http协议的请求
+      $.ajax({
+        // 请求的资源地址，不指定ip地址和端口号表示请求的是自己的服务器资源数据
+        url: "data.json",
+        // 请求方式：GET，POST
+        type: "get",
+        // 指定对服务器数据的解析格式
+        dataType: "JSON",
+        // data：表示发送给web服务器的参数
+        // 请求成功执行的函数
+        success: function (data) {
+          console.log(data);
+        },
+        // 请求失败执行的函数
+        error: function () {},
+        // 是否使用异步，默认不指定表示异步请求
+        async: true,
+      });
+    </script>
+  </head>
+  <body></body>
+</html>

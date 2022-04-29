@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="../JS/jquery-1.12.4.min.js"></script>
+
+    <script>
+      $(function () {
+        // 通过jquery选择器获取html的标签
+        var $divs = $("div");
+
+        // 获取包含有指定选择器的父标签
+        $divs.has("input").css({ background: "red" });
+
+        // 根据下标选择器指定的标签
+        $divs.eq(0).css({ background: "blue" });
+
+        // 选择集过滤就是在选中的集合标签里，根据需要过滤出自己想要的标签
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <p>哈哈哈哈哈哈哈哈哈哈或或或或或或或或</p>
+    </div>
+    <div>
+      <p>22222222222ppppppppp</p>
+      <input type="button" value="按钮" />
+    </div>
+  </body>
+</html>

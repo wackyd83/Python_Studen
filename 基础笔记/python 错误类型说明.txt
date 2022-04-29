@@ -1,0 +1,94 @@
+1.BaseException — 所有异常的基类
+
+2.SystemExit — 解释器请求退出
+
+3.KeyboardInterrupt — 用户中断执行(通常是输入^C)
+
+4.Exception — 常规错误的基类
+
+5.StopIteration — 迭代器没有更多的值
+
+6.GeneratorExit — 生成器(generator)发生异常来通知退出
+
+7.StandardError — 所有的内建标准异常的基类
+
+8.ArithmeticError — 所有数值计算错误的基类
+
+9.FloatingPointError — 浮点计算错误
+
+10.OverflowError — 数值运算超出最大限制
+
+11.ZeroDivisionError — 除(或取模)零 (所有数据类型)
+
+12.AssertionError — 断言语句失败
+
+13.AttributeError — 对象没有这个属性
+
+14.EOFError — 没有内建输入,到达EOF 标记
+
+15.EnvironmentError — 操作系统错误的基类
+
+16.IOError — 输入/输出操作失败
+
+17.OSError — 操作系统错误
+
+18.WindowsError — 系统调用失败
+
+19.ImportError — 导入模块/对象失败
+
+20.LookupError — 无效数据查询的基类
+
+21.IndexError — 列中没有此索引(index)
+
+22.KeyError — 映射中没有这个键
+
+23.MemoryError — 内存溢出错误(对于Python 解释器不是致命的)
+
+24.NameError — 未声明/初始化对象 (没有属性)
+
+25.UnboundLocalError — 访问未初始化的本地变量
+
+26.ReferenceError — 弱引用(Weak reference)试图访问已经垃圾回收了的对象
+
+27.RuntimeError — 一般的运行时错误
+
+28.NotImplementedError — 尚未实现的方法
+
+29.SyntaxError — Python 语法错误
+
+30.IndentationError — 缩进错误
+
+31.TabError — Tab 和空格混用
+
+32.SystemError — 一般的解释器系统错误
+
+33.TypeError — 对类型无效的操作
+
+34.ValueError — 传入无效的参数
+
+35.UnicodeError — Unicode 相关的错误
+
+36.UnicodeDecodeError — Unicode 解码时的错误
+
+37.UnicodeEncodeError — Unicode 编码时错误
+
+38.UnicodeTranslateError — Unicode 转换时错误
+
+39.Warning — 警告的基类
+
+40.DeprecationWarning — 关于被弃用的特征的警告
+
+41.FutureWarning — 关于构造将来语义会有改变的警告
+
+42.OverflowWarning — 旧的关于自动提升为长整型(long)的警告
+
+43.PendingDeprecationWarning — 关于特性将会被废弃的警告
+
+44.RuntimeWarning — 可疑的运行时行为(runtime behavior)的警告
+
+45.SyntaxWarning — 可疑的语法的警告
+
+46.UserWarning — 用户代码生成的警告
+————————————————
+版权声明：本文为CSDN博主「清幽梅」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_35647899/article/details/112029852

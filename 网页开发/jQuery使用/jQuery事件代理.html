@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- 事件冒泡：就是事件会一级一级往上传递 -->
+    <script src="../JS/jquery-1.12.4.min.js"></script>
+
+    <script>
+      $(function () {
+        var $btn = $("#btn1");
+        var $div = $("div");
+        // 通过事件代理，让父控件代理子控件的事件，然后执行子控件的相关操作
+        var $ul = $("div ul");
+
+        $btn.click(function () {
+          alert("我是按钮");
+          // 默认事件会进行冒泡
+          // 扩展：取消事件冒泡，就是不让事件向父级空间传递
+          return false;
+        });
+
+        // $div.click(function () {
+        //   alert("我是div");
+        // });
+
+        $ul.delegate('li','click',function(){
+            $(this).css({'background':'red'})
+        })
+
+        // 扩展：可以代理不同子控件的事件
+        var $div2=$('#box1')
+        // 可以代理不同子控件的事件，多个选择器之间使用逗号分隔
+        $div2.delegate('p,input','click',function(){
+            alert("我被人点了")
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <p id="p1">hahahah</p>
+      <input type="button" value="按钮" id="btn1" />
+      <ul>
+        <li>苹果</li>
+        <li>雪梨</li>
+        <li>哈密瓜</li>
+        <li>西瓜</li>
+        <li>芒果</li>
+      </ul>
+    </div>
+    <div id="box1">
+        <p id="p2">hahahah</p>
+        <input type="button" value="按钮" id="btn2" />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      var sName = "张三";
+      var iAge = 24;
+      var sSex = "男";
+
+      var sResult = sName + sSex;
+      console.log(sResult);
+
+      //   字符串和数字进行拼接，底层自动把数字类型转成字符串，这种操作称为隐式类型转换
+      sResult = sName + iAge;
+      console.log(sResult);
+
+      // +=
+      iAge += sSex;
+      console.log(iAge);
+    </script>
+  </head>
+  <body></body>
+</html>

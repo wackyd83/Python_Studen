@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- 选择集转移：根据指定标签为参照物，选中其他标签，这种操作叫做选择集转移 -->
+
+    <script src="../JS/jquery-1.12.4.min.js"></script>
+
+    <script>
+      $(function () {
+        // 获取div，并把div作为参照物，获取其他标签
+        var $div = $("#box1");
+        // CSS参数是一个JS对象，JS对象和python里的字典很类似
+        // 属性名和CSS里的属性名保持一致
+        // 选择上一个同级标签,不包含自身
+        $div.prev().css({ color: "red", "font-size": "25px" });
+        // 选择上面所有的同级标签,不包含自身
+        $div.prevAll().css({ "text-indent": "50px" });
+        // 选择下一个同级标签,不包含自身
+        $div.next().css({ background: "green" });
+        // 选择下面所有的同级标签,不包含自身
+        $div.nextAll().css({ "text-indent": "50px" });
+        // 选择同级的其他标签
+        $div.siblings().css({ "text-decoration": "underline" });
+        // 选择父标签
+        $div.parent().css({ background: "gray" });
+        // 选择所有的子标签
+        $div.children().css({ color: "red" });
+        // 查找指定的子标签
+        $div.find(".sp1").css({ color: "green" });
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      我是他爸
+      <h3>h3h3h3h3h3h3h3h3h3h3h3h3h3h3h3</h3>
+
+      <p>ppppppppppppp</p>
+      <p>oooooooooooooooo</p>
+
+      <div id="box1"><span>我是</span>一个<span class="sp1">div</span>标签</div>
+
+      <p>lllllllllllllllllll</p>
+      <p>8888888888888</p>
+
+      <h3>hhhhhhhhhhhhhhhhhh</h3>
+    </div>
+  </body>
+</html>
