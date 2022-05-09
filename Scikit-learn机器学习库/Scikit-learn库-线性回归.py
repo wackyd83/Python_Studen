@@ -73,7 +73,7 @@ print(model.coef_.round(2))
 new_RM = np.array([6.5]).reshape(-1, 1)
 '''.predict(arg)：预测数据，参数arg必须为一维数组（Series或2d array）'''
 print(model.predict(new_RM))
-'''.predict()等同于model.intercept_+model.coef_*x。x：须预测的数据，套用公司y=截距+斜率*x'''
+'''.predict()等同于model.intercept_+model.coef_*x。x：须预测的数据，套用公式y=截距+斜率*x'''
 print(model.intercept_ + model.coef_ * 6.5)
 
 '''使用测试集验证预测的数据'''
@@ -120,6 +120,7 @@ print('R平方（R-squared）1-(residuals**2).sum()/((Y_test-Y_test.mean())**2).
 X2 = boston[['RM', 'LSTAT']]
 Y = boston['MEDV']
 X2_train, X2_test, Y_train, Y_test = train_test_split(X2, Y, test_size=0.3, random_state=1)
+print(X_train)
 model2 = LinearRegression()
 model2.fit(X2_train, Y_train)
 y_test_predicted2 = model2.predict(X2_test)
