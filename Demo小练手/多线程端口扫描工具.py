@@ -86,6 +86,7 @@ def main():
     threads = [] # 保存新线程
     top = None # 取端口top数
     ip = "www.wackyd.top" # 扫描的ip
+    print('将要扫描的地址：',ip)
     port_list = port_scner.get_port_lists(top = top) # 根据参数获取总端口list
     #print(port_list)
 
