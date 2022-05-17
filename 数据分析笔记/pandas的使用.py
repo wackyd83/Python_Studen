@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+pd.options.display.max_columns = 8  #强制pd显示8个字段
+
 '''转换成pd.Series对象的3种方式，这3种方法都已指定索引（index）'''
 print(pd.Series([1, 2, 3], index=['a', 'b', 'c']))  # with index
 print(pd.Series(np.array([1, 2, 3]), index=['a', 'b', 'c']))  # from a 1darray
@@ -18,7 +20,7 @@ wine_dict = {
     'white_wine': [5, 0, 10]
 }
 sales = pd.DataFrame(wine_dict, index=["adam", "bob", "charles"])
-print(sales)
+print('sales:\n',sales)
 
 '''通过字段名查找pd.DataFrame对象中的数据'''
 print(sales['white_wine'])
@@ -75,7 +77,7 @@ print(presidents_df['height'][0:2])
 print(presidents_df.height)
 print(presidents_df.height[0:3])
 
-'''pd.DataFrame[['字段名1','字段名2']].head(n)：查询字段名1和字段名2前n行的数据'''
+'''pd.DataFrame[['字段名1','字段名2']].head(n)：查询字段名1和字段名2前n行的数据。选择单列时使用单中括号[]，选择多列时使用双中括号[[]]。'''
 n = 5
 print(f"height和age前{n}行的数据：\n", presidents_df[['height', 'age']].head(n))
 
@@ -137,3 +139,12 @@ print(presidents_df.agg([double,]))
 
 '''.agg([方法名])：对数据表的指定字段的每个数据进行批量运算'''
 print(presidents_df['order'].agg([double]))
+
+'''增加列，根据Sex字段生成male字段（布尔值）的信息'''
+df = pd.read_csv('../Scikit-learn机器学习库/titanic.csv')
+df['male'] = df['Sex'] == 'male'
+print('增加列后的数据表：\n',df.head())
+
+'''删除列，删除字段名为'Sex'的列'''
+df=df.drop('Sex',axis=1)
+print('删除列后的数据表：\n',df.tail())

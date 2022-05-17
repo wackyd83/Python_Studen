@@ -53,11 +53,16 @@ plt.savefig('plot.png')
 '''弹出提示框显示刚生成的图表'''
 plt.show()
 
+'''画一条穿过(10,0)和(100,3)2个点的线'''
+plt.plot([10,100],[0,3])
+plt.savefig('一条穿过(0,80)和(80,5)2个点的线.png')
+plt.show()
+
 '''读取pd.DataFrame对象并根据height、age字段生成点状分布图（散点图）'''
 presidents_df = pd.read_csv('president_heights_party.csv', index_col='name')
 '''plt.scatter：生成点状分布图（散点图）。默认为圆点。marker：配置散点的形状。color：配置散点的颜色'''
 plt.scatter(presidents_df['height'], presidents_df['age'],marker='>',color='r')
-plt.xlabel('身高');
+plt.xlabel('身高')
 plt.ylabel('年龄')
 plt.title('U.S. presidents')
 plt.savefig("presidents_df_scatter_1.png")

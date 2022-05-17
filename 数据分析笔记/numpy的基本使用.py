@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 heights = [189, 170, 189, 163, 183, 171, 185, 168, 173, 183, 173, 173, 175, 178, 183, 193, 178, 173, 174, 183, 183, 180,
            168, 180, 170, 178, 182, 180, 183, 178, 182, 188, 175, 179, 183, 193, 182, 183, 177, 185, 188, 188, 182, 185,
@@ -10,7 +11,7 @@ heights_arr = np.array(heights)
 print(f'heights_arr.size:{heights_arr.size}')
 
 '''numpy对象.shape：统计numpy对象的形状（纬度）'''
-print(f'heights_arr.shape:{heights_arr.shape}')
+print(f'heights_arr.shape数组的形状（纬度）:{heights_arr.shape}')
 
 ages = [57, 61, 57, 57, 58, 57, 61, 54, 68, 51, 49, 64, 50, 48, 65, 52, 56, 46, 54, 49, 51, 47, 55, 55, 54, 42, 51, 56,
         55, 51, 54, 51, 60, 62, 43, 55, 56, 61, 52, 69, 64, 46, 54, 47, 70]
@@ -108,6 +109,9 @@ print(f'(height_age_arr[:, 1] < 50).sum():{(height_age_arr[:, 1] < 50).sum()}')
 mask = height_age_arr[:, 0] >= 182
 print(f' height_age_arr[:, 0] >= 182:{mask}')
 
+'''mask.sum()：统计符合条件的元素数量'''
+print('统计符合条件的元素数量mask.sum()：',mask.sum())
+
 '''以mask（蒙版）过滤height_age_arr'''
 tall_presidents = height_age_arr[mask, ]
 print(f'tall_presidents.shape:{tall_presidents.shape}')
@@ -115,3 +119,11 @@ print(f'tall_presidents.shape:{tall_presidents.shape}')
 '''height_age_arr第1个数组大于等于182,并且第2个数组小于或等于50的元素建立一维数组mask（蒙版）'''
 mask = (height_age_arr[:, 0]>=182) & (height_age_arr[:,1]<=50)
 print(height_age_arr[mask,])
+
+'''df.values()函数：pandas对象转换成numpy对象'''
+df = pd.read_csv('../Scikit-learn机器学习库/titanic.csv')
+print('data.Series转换成numpy对象:\n',df['Fare'].values[0:10])
+print('data.dataFrame转换成numpy对象:\n',df[['Pclass','Fare','Age']].values[0:10])
+
+'''df.dataFrame的形状（纬度）'''
+print('df.dataFrame的形状（纬度）:',df.shape)
