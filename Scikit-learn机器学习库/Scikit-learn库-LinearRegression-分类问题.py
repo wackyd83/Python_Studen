@@ -125,3 +125,4 @@ model2 = LinearRegression()
 model2.fit(X2_train, Y_train)
 y_test_predicted2 = model2.predict(X2_test)
 print('多元线性回归模型的MSE：',mean_squared_error(Y_test, y_test_predicted2).round(2))
+
