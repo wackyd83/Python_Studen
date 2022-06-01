@@ -6,15 +6,13 @@ from rediscluster import RedisCluster
 
 if __name__ == '__main__':
     # 2.组织集群的host和端口
-    nodes = [{'host': 'service.wackyd.top', 'port': '7000'},
-             {'host': 'service.wackyd.top', 'port': '7001'},
-             {'host': 'service.wackyd.top', 'port': '7002'}
+    nodes = [{'host': 'service.wackyd.top', 'port': '6379'},
              ]
     try:
         # 3.创建集群实例
-        result = src = RedisCluster(startup_nodes=nodes, decode_responses=True)
-        print(result)
+        src = RedisCluster(startup_nodes=nodes, decode_responses=True)
+        print(src)
     except Exception as e:
         print(e)
 
-    src.set('name', son)
+    src.set('name', 'son')
