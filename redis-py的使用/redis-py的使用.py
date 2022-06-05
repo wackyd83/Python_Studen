@@ -35,6 +35,14 @@ if __name__ == '__main__':
     rs.zadd('zset有序集合',{random.choice(string.ascii_letters):random.choice(string.digits)})
 
     #  查询所有key
+
+    resslt=rs.set(random.randint(1,1024),data[::(random.randint(1,10))])
+    print(resslt)
+
+    #  添加hashkey
+    rs.hset('哈希类型数据',data[::(random.randint(1,10))],random.random())
+
+    #  查询所有key
     result = rs.keys('*')
 
     for key in result:
