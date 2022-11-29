@@ -1,0 +1,29 @@
+1.在本路径下创建django项目：
+django-admin startproject 项目名称
+#创建后项目名称作为该项目的文件夹被创建。
+
+2.创建APP（项目下的模块）：
+python manage.py startapp 模块名称
+#模块创建后在项目文件夹自动创建模块名称的文件夹。
+
+3.注册APP：
+在.\项目名称\settings.py文件中，INSTALLED_APPS函数中添加'APP名称'
+
+4.mysql数据库的包配置：
+在.\项目名称\__init__.py文件中，添加：
+'''
+import pymysql
+pymysql.install_as_MySQLdb()
+'''
+语句，配置mysql作为本工程的数据库
+
+5.在mysql手动创建数据库
+必须手动创建数据库，django不会帮你创建数据库，只会帮你创建表
+
+6.生成数据库迁移文件：
+python manage.py makemigrations
+#不会在数据库中创建表，只会生成迁移文件。
+
+7.执行迁移：
+python manage.py migrate 
+#在数据库中自动创建表
