@@ -42,6 +42,9 @@ class BookInfo(models.Model):
     commentcount = models.IntegerField(default=0)
     is_delete = models.BooleanField(default=False)
 
+    # django自动为我们添加了一个属性，这个属性就可以通过书籍查询人物信息
+    # peopleinfo_set
+
     def __str__(self):
         return self.name
 
