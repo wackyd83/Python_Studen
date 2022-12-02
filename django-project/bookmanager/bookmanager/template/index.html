@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="#">{{ name }}  你好！这是模板index.html</a>
+<ul>
+{#django的#}
+    <%{% for book in books %}
+        <li>我有一本《{{ book.name }}》</li>
+    {% endfor %}
+
+</ul>
+</body>
+</html>
