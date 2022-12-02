@@ -2,12 +2,28 @@
 django-admin startproject 项目名称
 #创建后项目名称作为该项目的文件夹被创建。
 
-2.创建APP（项目下的模块）：
+
+2.运行django项目：
+python manager.py runserver
+#运行已创建的django项目。
+python manager.py runserver 127.0.0.1:8001
+#设置以哪个ip及端口号运行django项目
+
+
+3.创建APP（子应用）（项目下的模块）：
 python manage.py startapp 模块名称
 #模块创建后在项目文件夹自动创建模块名称的文件夹。
 
-3.注册APP：
+4.注册APP：
 在.\项目名称\settings.py文件中，INSTALLED_APPS函数中添加'APP名称'
+
+5.创建后台管理员账号
+python manage.py createsuperuser
+输入账号、密码后创建管理员账号。
+
+6.注册模型
+在子应用的admin.py中，import子应用的models.py的模型类
+并在子应用的admin.py中输入admin.site.register(模型类)
 
 4.mysql数据库的包配置：
 在.\项目名称\__init__.py文件中，添加：
