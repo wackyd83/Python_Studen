@@ -52,7 +52,7 @@ class BookInfo(models.Model):
 
     class Meta:
         db_table = 'bookinfo'  # 定义数据表的名称，不使用自动生成的表名
-        verbose_name = 'wackyd'
+        verbose_name = '书籍信息'
 
 
 class PeopleInfo(models.Model):

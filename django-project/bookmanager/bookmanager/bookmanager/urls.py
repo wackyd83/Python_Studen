@@ -45,9 +45,12 @@ urlpatterns = [
     # 添加一项
     # 只要不是 admin/肯定会匹配到这里
     # 我们就都引导到book子应用
-    path(r'book/',include('book.urls')),
+    # 在include的第二个参数中添加一个namespace
+    # 这样，我们的name就变为了namespace:name
+    # namespace习惯上使用子应用的名字
+    path('book/',include(('book.urls','book'),namespace='book')),
 
-    re_path(r'login',views.login),
+    re_path(r'login/',views.login),
 
 
 ]

@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from book.models import BookInfo
 
 # Create your views here.
+from django.urls import reverse
+
 '''
 视图：
 1.就是python函数
@@ -26,12 +28,34 @@ def index(request):
     # 1.先把所有书籍查询出来
     # select * from BookInfo（以前学的SQL语句）
     # ORM模型：
-    books=BookInfo.objects.all()
+    books = BookInfo.objects.all()
     # books变量存放的是BookInfo实例对象，数据格式为[BookInfo(),BookInfo()]
     # 2.组织数据
-    context['books']=books
+    context['books'] = books
     # 3.将组织好的的数据传递给模板
     return render(request, 'index.html', context)
+
+############################################reverse#############################################################
+    # '''    reverse就是通过name来动态获取路由（路径）
+    #     如果没有设置namespace，则可以通过name来获取：reverse(name)
+    #     如果设置了namespace，则可以通过namespace:name来获取：reverse(namespace:name)
+    # '''
+    # reverse(viewname, urlconf=None, args=None, kwargs=None, current_app=None)，viewname 通过视图名字
+    # 路由是动态获取的
+    # 如果我们设置了namespace，这时就需要通过namespace:name来获取路由
+
+    # path=reverse('index')  # 没有设置namespace
+    # path = reverse('book:index')  # 设置namespace后的设置方式
+
+    # redirect跳转页面
+    # 1.登录成功后需要跳转到首页
+    # return redirect('/index/')  # 没有定义视图名称，只能通过路由进行跳转
+    # return redirect((path))
+
+    # 2.注册成功后需要跳转到首页
+    # return redirect('/index/')  # 没有定义视图名称，只能通过路由进行跳转
+    # return redirect((path))
+
 
 '''
 使用类似于ipython的东西
