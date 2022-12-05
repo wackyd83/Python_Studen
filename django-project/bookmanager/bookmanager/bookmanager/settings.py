@@ -25,12 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0!)xucfc*sy2g4kq3n8#ueoh(#+ti2-fae^nc9(sviifkvu1^w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 # DEBUG = False
 # 开发者进行调试用的.
 # 项目上线部署时须改为False
+DEBUG = True
 
-ALLOWED_HOSTS = ['test.wackyd.top',]
+
+# ALLOWED_HOSTS 允许以哪个主机的形式访问后端
+# 默认是127.0.0.1
+# 如果你改变了允许方式，需要将运行的IP/域名添加进来
+# 改变后，需要把默认的127.0.0.1自己添加进来才可以再次访问
+# 安全机制，只能已罗列的IP/域名进行访问
+ALLOWED_HOSTS = ['test.wackyd.top','127.0.0.1']
 
 
 # Application definition
