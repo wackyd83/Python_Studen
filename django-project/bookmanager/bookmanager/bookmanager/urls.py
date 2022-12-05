@@ -48,9 +48,9 @@ urlpatterns = [
     # 在include的第二个参数中添加一个namespace
     # 这样，我们的name就变为了namespace:name
     # namespace习惯上使用子应用的名字
-    path('book/',include(('book.urls','book'),namespace='book')),
+    re_path(r'.*?',include(('book.urls','book'),namespace='book')),
 
-    re_path(r'login/',views.login),
+    path(r'login/',views.login),
 
 
 ]

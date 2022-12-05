@@ -61,3 +61,9 @@ def index(request):
 使用类似于ipython的东西
 python manage.py shell
 '''
+
+def detail(request,category_id,book_id):
+
+    # 1/100
+    print(category_id,book_id)
+    return HttpResponse('datail')
