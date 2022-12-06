@@ -140,30 +140,50 @@ def detail(request, category_id, book_id):
     # print('转换成json后的data：',data)
 
     #####################################P请求头#########################################################
+    # """
+    # 在header里面添加的信息，key会自动添加http_前缀
+    # 请求头的信息都包含的request.META内。
+    # request.META返回的是一个字典，可以直接通过key获取value。
+    # """
+    #
+    # print(request.META)
+    # content_type = request.META['CONTENT_TYPE']
+    # print(content_type)
+    #
+    # """
+    # method：一个字符串，表示请求使用的HTTP方法，常用值包括：'GET'、'POST'。
+    # user：请求的用户对象。
+    # path：一个字符串，表示请求的页面的完整路径，不包含域名和参数部分。
+    # encoding：一个字符串，表示提交的数据的编码方式。
+    #
+    # 如果为None则表示使用浏览器的默认设置，一般为utf-8。
+    # 这个属性是可写的，可以通过修改它来修改访问表单数据使用的编码，接下来对属性的任何访问将使用新的encoding值。
+    # FILES：一个类似于字典的对象，包含所有的上传文件。
+    # """
+    # print('request.method:', request.method)
+    # print('request.user:', request.user)
+    # print('request.path:', request.path)
+    # print('request.encoding:', request.encoding)
+    # print('request.FILES:', request.FILES)
+
+    #####################################JsonResponse#########################################################
+    # from django.http import JsonResponse
+    # data={'name':'bracke','gender':'male','pwd':'123456'}
+    #
+    # return JsonResponse(data)
+    #
+    #####################################HttpResponse#########################################################
     """
-    在header里面添加的信息，key会自动添加http_前缀
-    请求头的信息都包含的request.META内。
-    request.META返回的是一个字典，可以直接通过key获取value。
+    通过HttpResponse传递的数据最好是字符串，如果传递字典等复杂数据，将会导致数据丢失。
+
+    HttpResponse
+    content 传递字符串，不要传递对象、字典等复杂数据
+    statue  HTTP status code must be an integer from 100 to 599.只能使用系统规定的响应代码。
+    content_type    是一个MIME类型
+                    语法形式是：大类/小类
+                    text/html、text/css、text/javascript
+                    application/json
+                    image/png、image/git、image/jpeg
     """
 
-    print(request.META)
-    content_type = request.META['CONTENT_TYPE']
-    print(content_type)
-
-    """
-    method：一个字符串，表示请求使用的HTTP方法，常用值包括：'GET'、'POST'。
-    user：请求的用户对象。
-    path：一个字符串，表示请求的页面的完整路径，不包含域名和参数部分。
-    encoding：一个字符串，表示提交的数据的编码方式。
-    
-    如果为None则表示使用浏览器的默认设置，一般为utf-8。
-    这个属性是可写的，可以通过修改它来修改访问表单数据使用的编码，接下来对属性的任何访问将使用新的encoding值。
-    FILES：一个类似于字典的对象，包含所有的上传文件。
-    """
-    print('request.method:', request.method)
-    print('request.user:', request.user)
-    print('request.path:', request.path)
-    print('request.encoding:', request.encoding)
-    print('request.FILES:', request.FILES)
-
-    return HttpResponse('datail')
+    return HttpResponse('datail',status=400)
