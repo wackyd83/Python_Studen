@@ -166,6 +166,17 @@ def detail(request, category_id, book_id):
     # print('request.encoding:', request.encoding)
     # print('request.FILES:', request.FILES)
 
+    #####################################跳转页面#########################################################
+    # 需求是跳转到首页
+
+    # 每次修改跳转都根据路径，容易出错
+    # return redirect('/index/')
+
+    # 通过reverse名字做跳转比较常用
+    path=reverse('book:index')
+    return redirect(path)
+
+
     #####################################JsonResponse#########################################################
     # from django.http import JsonResponse
     # data={'name':'bracke','gender':'male','pwd':'123456'}
