@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from book.models import BookInfo
@@ -80,20 +81,62 @@ def detail(request, category_id, book_id):
     # 我们在登录的时候会输入用户名和密码，通常用户名和密码都应该使用POST方式进行传递
     # 以下例子用get方式传递用户名和密码只用于教学说明，实际项目上不能如此使用
     # '''
-    query_params = request.GET
+    # query_params = request.GET
     # print(query_params)
 
     # http://127.0.0.1:8000/6/10450/?username=wackyd&password=123456
     # < QueryDict: {'username': ['wackyd'], 'password': ['123456']} >
-    username=query_params.get('username')
-    password=query_params.get('password')
-    print(username,password)
+    # username=query_params.get('username')
+    # password=query_params.get('password')
+    # print(username,password)
+    #
+    # # QueryDict以普通的字典形式来获取意见多值时，只能获取最后的那个值
+    # # 我们要获取一键一值的话，就需要使用QueryDict的get方法
+    # # 我们要获取一键多值的话，就需要使用QueryDict的getlist方法
+    # users=query_params.getlist('username')
+    # print(users)
 
-    # QueryDict以普通的字典形式来获取意见多值时，只能获取最后的那个值
+    #####################################POST 表单数据#########################################################
+
+    data = request.POST
+    # 获取表单数据后，获取一键一值和获取一键多值的方式跟request.GET一样。
     # 我们要获取一键一值的话，就需要使用QueryDict的get方法
     # 我们要获取一键多值的话，就需要使用QueryDict的getlist方法
-    users=query_params.getlist('username')
-    print(users)
+    # print(data.get('username'))
+    # print(data.get('gui'))
+    # print(data.getlist('username'))
+
+    #####################################POST json数据#########################################################
+    '''
+    json数据：json使用双引号
+    {
+        "name":"wackyd"
+    }
+    '''
+
+    # POST的json数据放在body中，需要通过request.body获取
+    body = request.body
+    print('body:',body)
+
+    # b'{\r\n    "username":"wackyd",\r\n    "password":"123456",\r\n    "parameter":"True"\r\n}'
+    # body中的json数据是字节数据，需要转码成字符串格式才能使用。
+    body_str = body.decode()  # python3.6版本后无需进行decode，可直接使用json.loads把他转成字典。
+    print('body_str:',body_str)
+
+    # 转码后是json形式的字符串，不能直接当字典使用。
+    """
+    json
+    json.dumps  将字典转换成json形式的字符串
+    json.loads  将json形式的字符串转换成字典
+    """
+    """
+    {
+        "username":"wackyd",
+        "password":"123456",
+        "parameter":"True"
+    }
+    """
+    data = json.loads(body_str)
+    print('转换成json后的data：',data)
 
     return HttpResponse('datail')
-
