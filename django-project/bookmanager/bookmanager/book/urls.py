@@ -1,5 +1,5 @@
 from django.urls import re_path,path
-from book.views import index,detail
+from book.views import index,detail,set_cookie
 
 urlpatterns=[
     # name就是给url起一个别名
@@ -25,6 +25,8 @@ urlpatterns=[
     # (?P<name>...)正则中给分组起别名
     # 关键字参数————推荐使用关键字参数
     re_path(r'(?P<category_id>\d+)/(?P<book_id>\d+)/', detail),  # 通过正则规定输入的格式来定义路由
+
+    path('set_cookie/', set_cookie),
 
 ]
 

@@ -176,7 +176,6 @@ def detail(request, category_id, book_id):
     path=reverse('book:index')
     return redirect(path)
 
-
     #####################################JsonResponse#########################################################
     # from django.http import JsonResponse
     # data={'name':'bracke','gender':'male','pwd':'123456'}
@@ -198,3 +197,40 @@ def detail(request, category_id, book_id):
     """
 
     return HttpResponse('datail',status=400)
+
+"""
+保存在客户端的数据叫cookie
+    0.概念
+    1.流程
+        第一次请求过程
+        1.我们的浏览器第一次请求服务器是，不会携带任务cookie信息
+        2.服务器接收到请求后，发现请求中没有任何cookie信息
+        3.服务器设置一个cookie，这个cookie设置在响应中。
+        4.我们的浏览器接收到这个响应后，发现响应中有cookie信息，浏览器会将cookie信息保存起来。
+        
+        第二次及其之后的过程
+        5.当我们的浏览器第二次及其之后的请求都会携带cookie信息。
+        6.我们的服务器接收到请求后，会发现请求中携带的cookie信息，这样就知道是谁发的请求。
+    2.看效果
+    3.从http协议角度深入掌握cookie的流程（原理）
+
+保存在服务器端的数据叫session
+"""
+
+def set_cookie(request):
+
+    # 1.先判断有没有cookie信息
+    # 先假设就是没有cookie
+
+    # 2.获取用户名
+    username=request.GET.get('username')
+
+    # 3.因为我们假设没有cookie信息，我们服务器就要设置cookie信息
+    response=HttpResponse('set_cookie')
+
+    # set_cookie(self,key,value)：
+    #
+    response.set_cookie('username',username)
+
+    # 4.返回响应
+    return response
