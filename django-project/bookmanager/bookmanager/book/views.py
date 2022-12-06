@@ -66,77 +66,104 @@ python manage.py shell
 
 
 def detail(request, category_id, book_id):
-    # 1/100
-    # print(category_id, book_id)
-
-    #####################################GET 查询字符串#########################################################
-    # '''
-    # https://www.baidu.com/s?wd=ip&rsv_spt=1&rsv_iqid=0x8df7d7fd0009b6ef&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_dl=tb&rsv_enter=1&rsv_sug3=2&rsv_sug1=2&rsv_sug7=100&rsv_sug2=0&rsv_btype=i&inputT=545&rsv_sug4=545
+    # # 1/100
+    # # print(category_id, book_id)
     #
-    # 以?作为分隔
-    # ?前表示路由
-    # ?后表示get方式传递的参数，称之为查询字符串
-    # ?key=value&key=value...
-    #
-    # 我们在登录的时候会输入用户名和密码，通常用户名和密码都应该使用POST方式进行传递
-    # 以下例子用get方式传递用户名和密码只用于教学说明，实际项目上不能如此使用
-    # '''
+    # #####################################GET 查询字符串#########################################################
+    # # '''
+    # # https://www.baidu.com/s?wd=ip&rsv_spt=1&rsv_iqid=0x8df7d7fd0009b6ef&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_dl=tb&rsv_enter=1&rsv_sug3=2&rsv_sug1=2&rsv_sug7=100&rsv_sug2=0&rsv_btype=i&inputT=545&rsv_sug4=545
+    # #
+    # # 以?作为分隔
+    # # ?前表示路由
+    # # ?后表示get方式传递的参数，称之为查询字符串
+    # # ?key=value&key=value...
+    # #
+    # # 我们在登录的时候会输入用户名和密码，通常用户名和密码都应该使用POST方式进行传递
+    # # 以下例子用get方式传递用户名和密码只用于教学说明，实际项目上不能如此使用
+    # # '''
     # query_params = request.GET
     # print(query_params)
-
-    # http://127.0.0.1:8000/6/10450/?username=wackyd&password=123456
-    # < QueryDict: {'username': ['wackyd'], 'password': ['123456']} >
+    #
+    # # http://127.0.0.1:8000/6/10450/?username=wackyd&password=123456
+    # # < QueryDict: {'username': ['wackyd'], 'password': ['123456']} >
     # username=query_params.get('username')
     # password=query_params.get('password')
     # print(username,password)
-    #
+    # #
     # # QueryDict以普通的字典形式来获取意见多值时，只能获取最后的那个值
     # # 我们要获取一键一值的话，就需要使用QueryDict的get方法
     # # 我们要获取一键多值的话，就需要使用QueryDict的getlist方法
     # users=query_params.getlist('username')
     # print(users)
-
-    #####################################POST 表单数据#########################################################
-
-    data = request.POST
-    # 获取表单数据后，获取一键一值和获取一键多值的方式跟request.GET一样。
-    # 我们要获取一键一值的话，就需要使用QueryDict的get方法
-    # 我们要获取一键多值的话，就需要使用QueryDict的getlist方法
+    #
+    # #####################################POST 表单数据#########################################################
+    #
+    # data = request.POST
+    # # 获取表单数据后，获取一键一值和获取一键多值的方式跟request.GET一样。
+    # # 我们要获取一键一值的话，就需要使用QueryDict的get方法
+    # # 我们要获取一键多值的话，就需要使用QueryDict的getlist方法
     # print(data.get('username'))
     # print(data.get('gui'))
     # print(data.getlist('username'))
+    #
+    # #####################################POST json数据#########################################################
+    # '''
+    # json数据：json使用双引号
+    # {
+    #     "name":"wackyd"
+    # }
+    # '''
+    #
+    # # POST的json数据放在body中，需要通过request.body获取
+    # body = request.body
+    # print('body:',body)
+    #
+    # # b'{\r\n    "username":"wackyd",\r\n    "password":"123456",\r\n    "parameter":"True"\r\n}'
+    # # body中的json数据是字节数据，需要转码成字符串格式才能使用。
+    # body_str = body.decode()  # python3.6版本后无需进行decode，可直接使用json.loads把他转成字典。
+    # print('body_str:',body_str)
+    #
+    # # 转码后是json形式的字符串，不能直接当字典使用。
+    # """
+    # json
+    # json.dumps  将字典转换成json形式的字符串
+    # json.loads  将json形式的字符串转换成字典
+    # """
+    # """
+    # {
+    #     "username":"wackyd",
+    #     "password":"123456",
+    #     "parameter":"True"
+    # }
+    # """
+    # data = json.loads(body_str)
+    # print('转换成json后的data：',data)
 
-    #####################################POST json数据#########################################################
-    '''
-    json数据：json使用双引号
-    {
-        "name":"wackyd"
-    }
-    '''
+    #####################################P请求头#########################################################
+    """
+    在header里面添加的信息，key会自动添加http_前缀
+    请求头的信息都包含的request.META内。
+    request.META返回的是一个字典，可以直接通过key获取value。
+    """
 
-    # POST的json数据放在body中，需要通过request.body获取
-    body = request.body
-    print('body:',body)
+    print(request.META)
+    content_type = request.META['CONTENT_TYPE']
+    print(content_type)
 
-    # b'{\r\n    "username":"wackyd",\r\n    "password":"123456",\r\n    "parameter":"True"\r\n}'
-    # body中的json数据是字节数据，需要转码成字符串格式才能使用。
-    body_str = body.decode()  # python3.6版本后无需进行decode，可直接使用json.loads把他转成字典。
-    print('body_str:',body_str)
-
-    # 转码后是json形式的字符串，不能直接当字典使用。
     """
-    json
-    json.dumps  将字典转换成json形式的字符串
-    json.loads  将json形式的字符串转换成字典
+    method：一个字符串，表示请求使用的HTTP方法，常用值包括：'GET'、'POST'。
+    user：请求的用户对象。
+    path：一个字符串，表示请求的页面的完整路径，不包含域名和参数部分。
+    encoding：一个字符串，表示提交的数据的编码方式。
+    
+    如果为None则表示使用浏览器的默认设置，一般为utf-8。
+    这个属性是可写的，可以通过修改它来修改访问表单数据使用的编码，接下来对属性的任何访问将使用新的encoding值。
+    FILES：一个类似于字典的对象，包含所有的上传文件。
     """
-    """
-    {
-        "username":"wackyd",
-        "password":"123456",
-        "parameter":"True"
-    }
-    """
-    data = json.loads(body_str)
-    print('转换成json后的data：',data)
+    print('request.method:', request.method)
+    print('request.user:', request.user)
+    print('request.path:', request.path)
+    print('request.encoding:', request.encoding)
+    print('request.FILES:', request.FILES)
 
     return HttpResponse('datail')
