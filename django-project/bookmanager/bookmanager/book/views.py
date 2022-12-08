@@ -332,3 +332,96 @@ def get_session(request):
 
     # 3.返回响应
     return HttpResponse(f'get_session____________user_id:{user_id}')
+
+"""
+登录页面
+    GET 请求是获取登录的页面
+    POST 请求是验证登录（用户名和密码是否正确）
+"""
+
+# GET请求获取登录的页面
+def show_login(request):
+
+    return render(request)
+
+# POST 请求是验证登录（用户名和密码是否正确）
+def veri_login(request):
+
+    return redirect('index')
+
+# 我想由2个视图变为1个视图
+def login(request):
+
+    # 我们需要区分业务逻辑
+    if request.method=='GET':
+        # GET请求是获取登录的页面
+        return render(request)
+    else:
+        # POST请求是验证登录（用户名和密码是否正确）
+        return redirect('index')
+
+"""
+面向对象：
+    类视图是采用面向对象的思路
+    1.定义类视图：
+        1.继承自view（from django.views import View）
+        2.不同的请求方式有不同的业务逻辑
+            类视图的方法：直接采用http的请求名字作为我们的函数名。例如:get、post、put、delete
+        3.类视图的方法的第二个参数必须是请求实例对象
+            类视图的方法必须有返回值，返回值是HttpResponse及其子类
+    2.类视图的url引导
+"""
+from django.views import View
+class BookView(View):
+
+    def get(self,request):
+        return HttpResponse('get')
+
+    def post(self,request):
+        return HttpResponse('post')
+
+    # def put(self,request):
+    #     return HttpResponse('put')
+
+    # 没有定义该实例方式时，请求了该方法，则返回405Method Not Allowed
+
+    # 如果定义了一个非http_method_names规定的请求方法名称，则无论如何也没有办法进行调用，因为不能修改http协议
+    def oooo(self,request):
+        return HttpResponse('oooo')
+"""
+class Person(object):
+    
+    # cls是什么？-->Person类
+    @classmethod
+    def say(cls):
+        pass
+        
+    # selft是什么？-->实例对象
+    def eat(selt):
+        pass
+        
+    @satticmethod
+    def run():
+        pass
+        
+Person.say()
+
+p=Person()
+p.eat()
+"""
+
+"""
+个人中心页面  --必须登录才能显示
+GET 方式展示个人中心
+POST    实现个人中心信息的修改
+定义类视图实现
+"""
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+class CenterView(LoginRequiredMixin,View):
+
+    def get(self,request):
+        return HttpResponse('centerview_get')
+
+    def post(self,request):
+        return HttpResponse('centerview_post')
