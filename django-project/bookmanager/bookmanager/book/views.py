@@ -199,28 +199,73 @@ def detail(request, category_id, book_id):
     return HttpResponse('datail',status=400)
 
 """
+面试题：
+    你是如何理解cookie的？/你谈一谈cookie。
+    1.概念
+    2.流程（大体流程，从http角度分析）
+    3.在开发过程中哪里使用了
+    4.你在开发过程中遇到什么印象深刻的地方
+
 保存在客户端的数据叫cookie
+    cookie保存在客户端
+    cookie是基于域名/ip的
+    
     0.概念
     1.流程
         第一次请求过程
-        1.我们的浏览器第一次请求服务器是，不会携带任务cookie信息
-        2.服务器接收到请求后，发现请求中没有任何cookie信息
+        1.我们的浏览器第一次请求服务器时，不会携带任务cookie信息。
+        2.服务器接收到请求后，发现请求中没有任何cookie信息。
         3.服务器设置一个cookie，这个cookie设置在响应中。
         4.我们的浏览器接收到这个响应后，发现响应中有cookie信息，浏览器会将cookie信息保存起来。
         
         第二次及其之后的过程
         5.当我们的浏览器第二次及其之后的请求都会携带cookie信息。
         6.我们的服务器接收到请求后，会发现请求中携带的cookie信息，这样就知道是谁发的请求。
-    2.看效果
+    2.看效果        
     3.从http协议角度深入掌握cookie的流程（原理）
+        第一次：
+            1.第一次请求服务器，不会携带任务cookie信息，请求头中没有任何cookie信息
+            2.服务器会为响应设置cookie信息，响应头中有set_cookie信息
+        第二次及其之后：
+            3.第二次及其之后的请求都会携带cookie信息，请求头中有cookie信息
+            4.（可选）在当前我们的代码中，没有再次在响应头中设置cookie，所以响应头中没有set_cookie信息
+
+    问题1：我换了浏览器，还能获取到session信息吗？答：不可以
+    
+    问题2：我不换浏览器，但删除sessionid，则获取不到session数据
+    
+    问题3：再去执行get_session时，会重新生成sessionid
 
 保存在服务器端的数据叫session
+    session需要依赖于cookie
+    如果浏览器禁用了cookie，则session不能实现
+    0.概念
+    1.流程
+        第一次请求：
+            1.第一次请求时，可以携带一些信息（用户名/密码），这是cookie中没有任何信息
+            2.当服务器接收到这个请求后，进行用户名和密码的验证，验证没有问题可以设置session信息
+            3.在设置session信息的同时（session信息保存在服务器端），服务器会在响应头中设置一个sessionid的cookie信息(由服务器自己设置的，不是我们设置的。）
+            4.客户端（浏览器）在接收到响应后，会将cookie信息保存起来（保存sessionid的信息）
+        第二次及其之后的请求：
+            5.第二次及其之后的请求都会携带session id信息
+            6.当服务器接收到这个请求之后，会获取到sessionid信息，然后进行验证，验证成功后，则可以获取session信息（session信息保存在服务器端）。
+    2.效果
+    3.从原理（http）角度
+        第一次请求：
+            1.第一次请求是，在请求头中没有携带任何cookie信息
+            2.我们在设置session时，session会做2件事：
+                #   第一件：将数据保存在数据库中
+                #   第二件：设置一个cookie信息，这个cookie信息是以sessionid为key，value为自定义信息
+                cookie肯定会以响应的形式在响应头中出现
+        第二次及其之后的请求：
+            3.都会携带cookie信息，特别是sessionid     
 """
 
 def set_cookie(request):
 
     # 1.先判断有没有cookie信息
     # 先假设就是没有cookie
+    # request.COOKIES 可以判断浏览器是否已有cookie信息
 
     # 2.获取用户名
     username=request.GET.get('username')
@@ -229,8 +274,61 @@ def set_cookie(request):
     response=HttpResponse('set_cookie')
 
     # set_cookie(self,key,value)：
-    #
-    response.set_cookie('username',username)
+    # max_age单位为秒，默认为None，设置为None时，关闭浏览器后删除cookie
+    # 时间是从服务器接收到这个请求时间+秒数计算之后的时间
+    response.set_cookie('username',username,max_age=0)
+
+    # 删除cookie的2种方式
+    # response.delete_cookie(key)
+    # response.set_cookie(key,value,max_age=0)
+
 
     # 4.返回响应
     return response
+
+def get_cookie(request):
+
+    # 1.服务器可以接受（查看）cookie信息
+    cookies=request.COOKIES
+    # cookies就是一个字典
+    username=cookies.get('username')
+    print(username)
+
+    # 2.得到用户信息就可以继续其他的业务逻辑了
+
+    return HttpResponse(f'get_cookie______{username}')
+
+def set_session(request):
+
+    # 1.第一次请求时，可以携带一些信息（用户名 / 密码），这是cookie中没有任何信息
+    print(request.COOKIES)
+
+    # 2.对用户名和密码进行验证
+    # 假设认为用户名和密码正确
+    # username=request.GET.get('username')
+    # pwd=request.GET.get('pwd')
+    user_id=3319
+
+    # 3.设置session信息
+    # request.session理解为字典
+    # 设置session的时候，其实session做了2件事：
+    #   第一件：将数据保存在数据库中
+    #   第二件：设置一个cookie信息，这个cookie信息是以sessionid为key
+    request.session['user_id']=user_id
+
+    # 4.返回响应
+    return HttpResponse(f'set_session________{user_id}')
+
+def get_session(request):
+
+    # 1.请求都会携带sessionid信息
+    print(request.COOKIES)
+
+    # 2.会获取到sessionid信息，然后进行验证，
+    # 验证成功，可以获取session信息
+    # request.session 字典
+    user_id=request.session['user_id']
+    user_id=request.session.get('user_id')
+
+    # 3.返回响应
+    return HttpResponse(f'get_session____________user_id:{user_id}')
