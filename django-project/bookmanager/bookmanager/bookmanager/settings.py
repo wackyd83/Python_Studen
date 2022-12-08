@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     # '''
 ]
 
+# 中间件
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -67,6 +68,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 注册中间件
+    'book.middleware.simple_middleware'
 ]
 
 #ROOT_URLCONF 是我么工程的url的配置入口
