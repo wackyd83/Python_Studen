@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="NoSqlConfiguration">
+    <option name="serverConfigurations">
+      <list>
+        <ServerConfiguration>
+          <option name="authenticationSettings">
+            <AuthenticationSettings>
+              <option name="password" value="Aa19831220." />
+            </AuthenticationSettings>
+          </option>
+          <option name="connectOnIdeStartup" value="true" />
+          <option name="databaseVendor" value="DatabaseVendor{name='RedisDB'}" />
+          <option name="label" value="阿里云redis" />
+          <option name="serverUrl" value="service.wackyd.top:6379" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="authenticationSettings">
+            <AuthenticationSettings>
+              <option name="password" value="Aa19831220." />
+            </AuthenticationSettings>
+          </option>
+          <option name="databaseVendor" value="DatabaseVendor{name='RedisDB'}" />
+          <option name="label" value="home-ubuntu" />
+          <option name="serverUrl" value="www.wackyd.top:1222" />
+        </ServerConfiguration>
+      </list>
+    </option>
+  </component>
+</project>
