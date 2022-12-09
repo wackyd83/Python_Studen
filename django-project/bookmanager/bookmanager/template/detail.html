@@ -1,0 +1,14 @@
+{#把继承的html模板写在最顶部，继承自谁就写模板的文件名#}
+{% extends 'base.html' %}
+
+{#需要修改模板的哪个block，就直接改写那个版块#}
+{% block title %}
+    详情页面
+{% endblock title %}
+
+{% block main %}
+    <a href="http://www.baidu.com">点我跳转百度</a>
+{% endblock main %}
+
+{#不需要继承的block部分就重写为空#}
+{% block footer %}{% endblock footer %}

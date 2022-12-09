@@ -450,4 +450,5 @@ class HomeView(View):
             'desc':'<script>alert("hot")</script>'
         }
 
-        return render(request,'index.html',context=context)
+        # return render(request,'index.html',context=context)
+        return render(request,'detail.html',context=context)

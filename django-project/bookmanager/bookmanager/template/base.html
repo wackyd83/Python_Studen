@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+{#顶部栏#}
+{% block header %}
+    <h1>顶部</h1>
+
+{% endblock header %}
+
+{#正文部分#}
+{% block main %}
+    <h1>我是主要部分</h1>
+{% endblock main %}
+
+{#底部部分#}
+{% block footer %}
+    <h1>this is footer</h1>
+{% endblock footer %}
+
+</body>
+</html>
