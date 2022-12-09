@@ -40,7 +40,7 @@ from login import views
 '''
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),  # 使用jinja2模板，必须注释admin后台相关配置及路由，否则会报错
 
     # 添加一项
     # 只要不是 admin/肯定会匹配到这里

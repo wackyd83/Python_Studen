@@ -447,8 +447,11 @@ class HomeView(View):
                 '2019':17000,
                 '2021':25000
             },
-            'desc':'<script>alert("hot")</script>'
+            'desc':'<script>alert("hot")</script>',
+            'li':'B', # 自定义过滤器的参数
+            'le':'a', # 自定义过滤器的参数
+            'la':'a', # 自定义过滤器的参数
         }
 
-        # return render(request,'index.html',context=context)
-        return render(request,'detail.html',context=context)
+        # return render(request,'detail.html',context=context)
+        return render(request,'index.html',context=context)

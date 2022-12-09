@@ -42,7 +42,7 @@ ALLOWED_HOSTS = ['test.wackyd.top','127.0.0.1']
 # Application definition
 # 安装/注册子应用
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',  # 使用jinja2模板，必须注释admin后台相关配置及路由，否则会报错
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',  # session默认开启
@@ -81,11 +81,15 @@ ROOT_URLCONF = 'bookmanager.urls'
 # 和模板相关的配置信息
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 'BACKEND': 'django.template.backends.django.DjangoTemplates',  # 默认模板引擎
+        'BACKEND': 'django.template.backends.jinja2.Jinja2', # 模板引擎改为jinja2
         # dirs 设置模板路径
         'DIRS': [os.path.join(BASE_DIR,'template')],
         'APP_DIRS': True,
         'OPTIONS': {
+            # 'environment':'jinja2,Environment', # jinja2的默认设置，可加可不加
+            'environment':'book.jinja2_env.environment', # 必须修改为使用book应用下jinja2_env文件才能使用自定义过滤器
+
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

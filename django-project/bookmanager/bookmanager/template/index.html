@@ -16,20 +16,28 @@
 <hr>
 我的年龄是：{{ age }}
 <hr>
-{#过滤器的语法形式： 变量|过滤器：参数#}
-现在时间是：{{ timenow|date:'Y年 m月 d日' }}
+{#django模板过滤器的语法形式： 变量|过滤器：参数#}
+{#jinja2模板过滤器的语法形式：函数(变量名,参数)#}
+{#pycharm报错是因为pycharm认为出错了，实际上没错#}
+{#因为pycharm自带的是django引擎，告知pycharm现在的引擎是jinja2#}
+现在时间是：{{ date(timenow,'Y年 m月 d日') }}
 <hr>
-我总共有{{ friends|length }}个朋友<p>
+django语法：我总共有{{ friends|length }}个朋友<p>
+我总共有{{ length(friends) }}个朋友<p>
 我的朋友们是：{{ friends }}
 <hr>
 我的girlfriend是：{{ friends.2 }}
 <hr>
-我的简介是{{ desc|safe }}
+{#我的简介是{{ desc|safe }}#}
+我的简介是{{ safe(desc) }}
 <hr>
-没有定义的变量{{ abcde|default:'我就是默认值~~~~~~~~~~~~~~~~~' }}
+django语法：没有定义的变量{{ abcde|default,'我就是默认值~~~~~~~~~~~~~~~~~' }}<p></p>
+没有定义的变量{{ default(abcd,'我就是默认值~~~~~~~~~~~~~~~~~') }}
 <hr>
 {% for item in friends %}
-    <li>{{ forloop.counter }}:{{ item }}</li>
+    {# django用的是forloop，jinja2用的是loop   #}
+    {# loop是对列表的一些属性操作#}
+    <li>{{ loop.index }} {{ item }}</li>
 {% endfor %}
 <hr>
 {% if age > 5 %}
@@ -42,9 +50,10 @@
 我第一年的月薪是：{{ money.2019 }}
 {#我是注释#}
 
-{% comment %}
-我是多行注释
+{#jinja2没有多行注释#}
 
-{% endcomment %}
+<hr>
+{#自定义过滤器的使用语法为：变量|过滤器名(变量2，变量3)#}
+我是自定义过滤器：{{ li|do_listreverse(le,la) }}
 </body>
 </html>
