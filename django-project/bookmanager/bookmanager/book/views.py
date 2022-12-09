@@ -471,8 +471,6 @@ class HomeView(View):
         response = render(request, 'index.html', context)
 
         # csrftoken放在cookie中
-        # 是因为同源策略的原因
-        # 黑客（钓鱼网站）拿不到cookie中token的具体值
         response.set_cookie('csrftoken',csrftoken)
 
         return response
