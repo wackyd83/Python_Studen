@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
@@ -425,3 +426,28 @@ class CenterView(LoginRequiredMixin,View):
 
     def post(self,request):
         return HttpResponse('centerview_post')
+
+##########################################模板#############################################################
+
+class HomeView(View):
+
+    def get(self,request):
+
+        # 1.获取数据
+        username=request.GET.get('username')
+
+        # 2.组织数据
+        context={
+            'username':username,
+            'age':10,
+            'timenow':datetime.now(),
+            'friends':['Tom','Jack','Roser'],
+            'money':{
+                '2020':16000,
+                '2019':17000,
+                '2021':25000
+            },
+            'desc':'<script>alert("hot")</script>'
+        }
+
+        return render(request,'index.html',context=context)

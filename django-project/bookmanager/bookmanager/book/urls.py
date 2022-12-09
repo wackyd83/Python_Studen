@@ -1,5 +1,5 @@
 from django.urls import re_path,path
-from book.views import index,detail,set_cookie,get_cookie,set_session,get_session,BookView,CenterView
+from book.views import index,detail,set_cookie,get_cookie,set_session,get_session,BookView,CenterView,HomeView
 
 urlpatterns=[
     # name就是给url起一个别名
@@ -42,5 +42,6 @@ urlpatterns=[
     # re_path的第二个参数是    视图函数名
     re_path(r'bookview/',BookView.as_view()),
     re_path(r'centerview/',CenterView.as_view()),
+    re_path(r'homeview/',HomeView.as_view()),
 ]
 

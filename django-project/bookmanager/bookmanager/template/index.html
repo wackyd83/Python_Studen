@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="#">{{ name }}  你好！这是模板index.html</a>
+<a href="#">{{ name}}  {{ username }}你好！这是模板index.html</a>
 <ul>
 {#django的#}
     <%{% for book in books %}
@@ -13,5 +13,38 @@
     {% endfor %}
 
 </ul>
+<hr>
+我的年龄是：{{ age }}
+<hr>
+{#过滤器的语法形式： 变量|过滤器：参数#}
+现在时间是：{{ timenow|date:'Y年 m月 d日' }}
+<hr>
+我总共有{{ friends|length }}个朋友<p>
+我的朋友们是：{{ friends }}
+<hr>
+我的girlfriend是：{{ friends.2 }}
+<hr>
+我的简介是{{ desc|safe }}
+<hr>
+没有定义的变量{{ abcde|default:'我就是默认值~~~~~~~~~~~~~~~~~' }}
+<hr>
+{% for item in friends %}
+    <li>{{ forloop.counter }}:{{ item }}</li>
+{% endfor %}
+<hr>
+{% if age > 5 %}
+    大于5岁
+{% else %}
+    不大于5岁
+{% endif %}
+
+<hr>
+我第一年的月薪是：{{ money.2019 }}
+{#我是注释#}
+
+{% comment %}
+我是多行注释
+
+{% endcomment %}
 </body>
 </html>
