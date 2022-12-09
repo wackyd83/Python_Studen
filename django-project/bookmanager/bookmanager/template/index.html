@@ -5,14 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<a href="#">{{ name}}  {{ username }}你好！这是模板index.html</a>
-<ul>
-{#django的#}
-    <%{% for book in books %}
-        <li>我有一本《{{ book.name }}》</li>
-    {% endfor %}
-
-</ul>
+<form method="post">
+    <input type="hidden" name="csrftoken" value="{{ csrftoken }}">
+{#    <label>账户：</label><input type="text" name="to_account" placeholder="请输入对方账户"><br/>#}
+{#    <label>金额：</label><input type="number" name="money" placeholder="请输入转账金额"><br/>#}
+{#    <label>短信验证码：</label><input type="text" name="smscode" placeholder="短信验证码"><br/>#}
+    <input type="submit" value="转账">
+</form>
+<hr>
+<a href="#">{{ default(username,'wackyd') }}你好！这是模板index.html</a>
 <hr>
 我的年龄是：{{ age }}
 <hr>
@@ -29,7 +30,7 @@ django语法：我总共有{{ friends|length }}个朋友<p>
 我的girlfriend是：{{ friends.2 }}
 <hr>
 {#我的简介是{{ desc|safe }}#}
-我的简介是{{ safe(desc) }}
+{#我的简介是{{ safe(desc) }}#}
 <hr>
 django语法：没有定义的变量{{ abcde|default,'我就是默认值~~~~~~~~~~~~~~~~~' }}<p></p>
 没有定义的变量{{ default(abcd,'我就是默认值~~~~~~~~~~~~~~~~~') }}
