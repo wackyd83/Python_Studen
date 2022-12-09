@@ -6,6 +6,7 @@ from book.models import BookInfo
 
 # Create your views here.
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 '''
 视图：
@@ -454,4 +455,40 @@ class HomeView(View):
         }
 
         # return render(request,'detail.html',context=context)
-        return render(request,'index.html',context=context)
+
+
+
+        ############################################CSRF##############################################
+        from django.middleware.csrf import get_token
+        # 生成一个随机码
+        # 自定义csrf_tonken时，不能使用csrf_token的变量名称，否则会与系统的csrf中间件的变量名冲突，导致获取的csrf_token不同
+        csrftoken=get_token(request)
+
+        # 要先把csrftoken放入context，然后封装成response，顺序不能错
+        context['csrftoken'] = csrftoken
+
+        # 封装成response
+        response = render(request, 'index.html', context)
+
+        # csrftoken放在cookie中
+        # 是因为同源策略的原因
+        # 黑客（钓鱼网站）拿不到cookie中token的具体值
+        response.set_cookie('csrftoken',csrftoken)
+
+        return response
+
+    def post(self,request):
+        # 获取cookie记录的csfr_token的值
+        cookie_token=request.COOKIES.get('csrftoken')
+
+        # 获取随表单提交的csrf_token的值
+        csrftoken=request.POST.get('csrftoken')
+
+        # 校验cookie_token和csrftoken是否一致
+        if cookie_token == csrftoken:
+            return HttpResponse(f'成功_____csrftoken:{csrftoken}_______cookie_token:{cookie_token}')
+        else:
+            return HttpResponse(f'对不上，不成功_____csrftoken:{csrftoken}_______cookie_token:{cookie_token}')
+
+
+
