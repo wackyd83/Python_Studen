@@ -307,16 +307,33 @@ def set_session(request):
 
     # 2.对用户名和密码进行验证
     # 假设认为用户名和密码正确
-    # username=request.GET.get('username')
+    username=request.GET.get('username')
     # pwd=request.GET.get('pwd')
-    user_id=3319
+    user_id=123
 
     # 3.设置session信息
     # request.session理解为字典
+    # request.session=SessionStorage,调用时就进行了session的存储
     # 设置session的时候，其实session做了2件事：
     #   第一件：将数据保存在数据库中
     #   第二件：设置一个cookie信息，这个cookie信息是以sessionid为key
+    # 在redis中增加1条session数据
     request.session['user_id']=user_id
+
+    # 删除某一个数据
+    # del request.session['user_id']
+
+    # 删除session的所有数据
+    # request.session.clear()
+
+    # 把数据库/redis中的key都删除了
+    # request.session.flush()
+
+    # session是有时间的，默认是2周
+    # request.session.set_expiry(seconds)
+    # 把session设置一个合理的时间，可以提高用户信息的安全性
+    request.session.set_expiry(10)
+
 
     # 4.返回响应
     return HttpResponse(f'set_session________{user_id}')
@@ -324,13 +341,15 @@ def set_session(request):
 def get_session(request):
 
     # 1.请求都会携带sessionid信息
-    print(request.COOKIES)
+    # print(request.COOKIES)
 
     # 2.会获取到sessionid信息，然后进行验证，
     # 验证成功，可以获取session信息
     # request.session 字典
-    user_id=request.session['user_id']
+    # 获取数据
+    # 获取字典某个key的value最好使用dict.get['key']，这样就算没有key也不会报错
     user_id=request.session.get('user_id')
+    print(f'user_id:{user_id}')
 
     # 3.返回响应
     return HttpResponse(f'get_session____________user_id:{user_id}')

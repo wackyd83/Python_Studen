@@ -72,6 +72,24 @@ MIDDLEWARE = [
     # 注册中间件
     'book.middleware.simple_middleware'
 ]
+#
+# SESSION_ENGINE='django.contrib.sessions.backends.db'  # 默认设置，session保存在数据库中。
+# SESSION_ENGINE='django.contrib.sessions.backends.cache'  # 设置为保存在服务器内存中，速度快，但断电丢失
+# SESSION_ENGINE='django.contrib.sessions.backends.cached_db'  # 设置为混合存储，先找内存，再找数据库。
+# cache缓存设置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://www.wackyd.top:1222/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": "Aa19831220."
+        }
+    }
+}
+# session引擎设置为使用cache
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 #ROOT_URLCONF 是我么工程的url的配置入口
 #默认是 工程名.urls
