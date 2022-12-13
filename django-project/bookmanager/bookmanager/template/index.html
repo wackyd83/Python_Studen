@@ -6,7 +6,15 @@
 </head>
 <body>
 <form method="post">
-    <input type="hidden" name="csrftoken" value="{{ csrftoken }}">
+{#    自定义的csrftoken使用方法#}
+{#    <input type="hidden" name="csrftoken" value="{{ csrftoken }}">#}
+
+{#    django系统自带的csrf使用方法#}
+{#    {% csrf_token %}#}
+
+{#    使用jinja2模板需要换成以下的csrf的调用方法#}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
 {#    <label>账户：</label><input type="text" name="to_account" placeholder="请输入对方账户"><br/>#}
 {#    <label>金额：</label><input type="number" name="money" placeholder="请输入转账金额"><br/>#}
 {#    <label>短信验证码：</label><input type="text" name="smscode" placeholder="短信验证码"><br/>#}

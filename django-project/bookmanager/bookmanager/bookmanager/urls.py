@@ -50,7 +50,7 @@ urlpatterns = [
     # namespace习惯上使用子应用的名字
     re_path(r'.*?',include(('book.urls','book'),namespace='book')),
 
-    path(r'login/',views.login),
+    path(r'login/',views.LoginView.as_view()),
 
 
 ]

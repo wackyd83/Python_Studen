@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>csrf_token验证试验</h1>
+<form action="" method="post">
+{#    django默认模板引擎使用这个语句#}
+{#    {% csrf_token %}  #}
+
+{#    jinja2模板引擎使用这个语句#}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <input type="text" name="money">
+    <input type="submit" value="提交">
+
+</form>
+</body>
+</html>
