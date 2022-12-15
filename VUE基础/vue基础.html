@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.Vue的开发环境导包   -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <!-- 2.定义一个标签，并需要给标签添加一个id -->
+    <div id='app'>
+        <!-- ############################绑定数据########################## -->
+        <h2>绑定数据</h2>
+        <a href='#'>{{message}}</a><p></p>
+        <span>{{url}}</span><p></p>
+        <!-- <span>{{world}}</span> -->
+        <!-- v-bind:绑定数据 -->
+        <a v-bind:href="url">点我跳转</a><p></p>
+        <!-- v-bind可以简写为":" -->
+        <span :title='showmessage'>鼠标放在这里</span>  <hr>
+
+        <!-- ############################if、else、else-if、v-show条件判断########################## -->
+        <h2>if、else、else-if、v-show条件判断</h2>
+        <!-- v-if:进行if判断 -->
+        <a href="#" v-if='isLogin'>登录成功，欢迎你归来</a><p></p>
+
+        <!-- v-if后进行else-if或else判断，需紧跟if -->
+        <a href="#" v-if='level===1'>青铜（等级一）</a>
+        <a href="#" v-else-if='level===2'>黑铁（等级二）</a>
+        <a href="#" v-else>王者</a><p></p>
+
+        <!-- 根据seen，判断是否显示 -->
+        <!-- v-if:根据判断结果，直接把元素删除 -->
+        <span v-if='seen'>v-if</span><p></p>
+
+        <!-- v-show:根据判断结果，只将display属性设置为none，但元素还在 -->
+        <span v-show='seen'>v-show</span> <hr>
+
+        <!-- ########################for循环、遍历########################## -->
+        <h2>for循环、遍历</h2>
+        <!-- 显示整个列表 -->
+        {{items}}
+
+        <ul>
+            <!-- 用for循环，遍历列表并诸葛显示 -->
+            <li v-for='(item,index) in items'>{{index+1}} ~~~ {{item}} </li>
+        </ul>
+
+        <!-- 对对象（字典）进行遍历 -->
+        <ul>
+            <li v-for='(value,key) in object'>{{key}} : {{value}}</li>
+        </ul>
+
+        <ul>
+            <li v-for='todo in todos'>{{todo.title}} : {{todo.author}}  出版日期：{{todo.publishedAt}}</li>
+        </ul><hr>
+
+        <!-- ######################v-on监听事件############################### -->
+        <h2>v-on监听事件</h2><p></p>
+        <!-- v-on:监听（绑定）事件 -->
+        <button v-on:click='login'>登录按鈕</button> <br><p></p>
+        <!-- @事件名称：v-on监听事件的缩写 -->
+        <a href="javascript:'" @click='register'>注册</a> <br><p></p>
+
+        <span>{{total}}</span>
+        <button @click='add(counter)'>点击+1</button><hr>
+
+        <!-- ###########################v-mode绑定数据#################################### -->
+        <h2>v-model绑定数据</h2>
+        <table>
+            <tr><td>用户名</td><td><input type="text" name="username" v-model='username'></td></tr>
+            <tr><td>密码</td><td><input type="password" name="password1" v-model='password1'></td></tr>
+            <tr><td>确认密码</td><td><input type="password" name="password2" v-model='password2'></td></tr>
+            <hr>
+            <tr>
+                <td>性别</td>
+                <td>
+                    男 <input type="radio" name='sex' value="boy" v-model='sex'>
+                    女 <input type="radio" name='sex' value="girl" v-model='sex'>
+                </td>
+            </tr>
+            <tr>
+                <td>爱好</td>
+                <td>
+                  足球 <input type="checkbox" name="like" value="足球" v-model="like"> 
+                  篮球 <input type="checkbox" name="like" value="篮球" v-model="like">
+                  兵乓球<input type="checkbox" name="like" value="兵乓球" v-model="like"> 
+                </td>
+              </tr>
+            <tr>
+                <td>所在城市</td>
+                <td>
+                  <select name="city" v-model="city">
+                    <option value="北京">北京</option>
+                    <option value="上海">上海</option>
+                    <option value="广州">广州</option>
+                    <option value="深圳">深圳</option>
+                  </select> 
+                </td>
+              </tr>
+            <tr>
+                <td>个人介绍</td>
+                <td>
+                    <textarea name="desc" v-model='desc' cols="30" rows="10"></textarea>
+                </td>
+            </tr>
+        </table>
+        <button @click='sumbit'>注册</button><hr>
+        <!-- ###########################todolist#################################### -->
+        <h2>todolist的增删改查</h2>
+        <input type="text" name='todoitem' v-model='newitem'> <button @click='todolist_sumbit'>添加</button>
+        <hr>
+        
+        <ul>
+            <li v-for='(item,index) in todolist'><a href="#" @click='up(index)' v-show='index!=0'>↑</a> {{index+1}}  {{item}}  <button @click='dele_item(index)'>删除</button> <a href="#" @click='down(index)' v-show='index!=todolist.length-1'>↓</a></li>
+        </ul>
+    </div>
+
+</body>
+
+<!-- 3.创建Vue实例 -->
+<script type='text/javascript'>
+    var vm = new Vue({
+        // 接管标签
+        el:'#app',
+        // 绑定数据
+        data: {
+            message: 'hello',
+            url:'https://www.baidu.com',
+            showmessage:'当前的时间是'+new Date().toLocaleString(),
+            isLogin: true,
+            level:2,
+            seen:true,
+            counter:1,
+            total:0,
+            items:['python','mysql','linux','html','js','css','AI'],
+            object:{
+                title:'《How to do lists in Vue》',
+                author:'Jane Doe',
+                publishedAt:'2016-04-10',
+            },
+            todos: [
+            {
+                title: 'Vue',
+                author: 'Jane Doe',
+                publishedAt: '2016-04-10'
+            },
+            {
+                title: 'python',
+                author: 'Ricky',
+                publishedAt: '2019-04-10'
+            },
+            {
+                title: 'itcast',
+                author: 'itcast',
+                publishedAt: '2006-05-08'
+            }
+            ],
+
+            // 获取页面输入的数据
+            username:'',
+            password1:'',
+            password2:'',
+            sex:'',
+            city:'',
+            desc:'',
+            all:'',
+            // 多选控件要存储到列表中
+            like:[],
+            todolist:[],
+            newitem:'',
+            
+        },
+
+        // 方法
+        methods:{
+            login:function(){
+                alert('我被点击了');
+            },
+            register:function(){
+                alert('注册');
+            },
+            // this表示当前的vue，我们通过this.total来获取data中的变量
+            add:function(counter){
+                this.total+=counter;
+                // alert(this.total);
+            },
+            sumbit:function(){
+                this.all=this.username+this.password1+this.password2+this.sex+this.like+this.city+this.desc
+            },
+            todolist_sumbit:function(){
+                this.todolist.push(this.newitem);
+                // 添加数据后，输入框置空
+                this.newitem='';
+            },
+            dele_item:function(index){
+                this.todolist.splice(index,1);
+            },
+            // 
+            up:function(index){
+                // 1.获取当前的元素
+                current=this.todolist[index]
+                // 2.先把当前的元素删除
+                this.todolist.splice(index,1)
+                // 3.再添加，添加的时候让它的索引-1
+                this.todolist.splice(index-1,0,current)
+            },
+            down:function(index){
+                // 1.获取当前的元素
+                current=this.todolist[index]
+                // 2.先把当前的元素删除
+                this.todolist.splice(index,1)
+                // 3.再添加，添加的时候让它的索引+1
+                this.todolist.splice(index+1,0,current)
+            },
+        }
+    })
+
+</script>
+
+</html>

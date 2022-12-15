@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.Vue的开发环境导包   -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 导入axios环境包 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 2.定义一个标签，并需要给标签添加一个id -->
+    <div id='app'>
+{#        当前是vue的大胡子语法和django/flask的模板语法冲突了，需要改变vue的html文件#}
+        <span>[[message]]</span>
+
+        <button @click='login'>get登录</button> <p></p>
+
+        <hr><span>username:[[username]]</span> <hr>
+
+        <button @click='login2'>post登录</button>
+
+    </div>
+
+
+</body>
+
+<!-- 3.创建Vue实例 -->
+<script type='text/javascript'>
+    var vm = new Vue({
+        el: '#app',
+        
+        delimiters:['[[',']]'],  
+        data: {
+            message: 'hello',
+            username:'',
+        },
+        methods:{
+            login:function(){
+                // alert('走了吗')
+                // 这里发送axios（ajax）请求
+                // let定义变量，let定义的变量作用域在本函数内
+                let url='http://127.0.0.1:8000/rece/?username=green&password=123456'
+                // then,catch用ES6语法的箭头函数：()=>{},this
+                // then是请求成功回调
+                axios.get(url).then((response)=>{
+                    // 获取response(响应)->response.data(返回的数据)->info->username->username
+                    console.log(response.data.info.username)
+                    this.username=response.data.info.username
+                // catch是请求失败的回调
+                }).catch((error)=>{
+                    console.log(error)
+                })
+            },
+            login2:function(){
+                let url='http://127.0.0.1:8000/rece/'
+                // then是成功的回调，catch是失败的回调
+                axios.post(url,{
+                    'username':'blue',
+                    'password':'654321',
+                }).then((response)=>{
+                    console.log(response.data.info.username)
+                    this.username=response.data.info.username
+                }).catch((error)=>{
+                    console.log(error)
+                })
+
+            },
+        },
+    })
+
+</script>
+
+</html>

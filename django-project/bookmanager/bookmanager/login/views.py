@@ -20,3 +20,8 @@ class LoginView(View):
 
         return HttpResponse('csrf_token 试验post')
 
+class ReceiveView(View):
+
+    def get(self,request):
+
+        pass
