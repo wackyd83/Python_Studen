@@ -58,3 +58,31 @@ class BookSerializer(serializers.Serializer):
         instance.btitle=validated_data['btitle']
         instance.save()
         return instance
+
+# 模型类序列化器
+class BookModelSerialzier(serializers.ModelSerializer):
+    # 修改序列化器中的限制
+    # 1.显示指明字段
+    bread=serializers.IntegerField(max_value=100,min_value=20)
+
+    # 新增原来模型类没有的字段
+    # 新增字段与指定模型类中的字段方法一起用时，必须把新增的字段也包含在fields指定的字段内。
+    sms_code=serializers.CharField(max_length=6,min_length=6)
+
+    class Meta:
+        model=BookInfo  # 指定生成字段的模型类
+        # fields=('btitle','bread')  # 指定模型类中的字段
+        fields='__all__'  # 指定模型类中的所有字段
+        # exclude=('btitle')  # 除指定字段外，模型类中的其他字段
+
+        # 2.添加修改字段的限制选项参数
+        extra_kwargs={
+            'bcomment':{
+                'max_value':100
+            },
+            'btitle':{
+                'min_length':5
+            }
+        }
+
+        read_only_fields=('btitle',)
