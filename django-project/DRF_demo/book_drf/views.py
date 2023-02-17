@@ -29,18 +29,12 @@ class Books(View):
         # ser.is_valid(raise_exception=True)  # 序列化器的参数验证方法,raise_exception=True:自动抛出异常进行返回
         ser.is_valid()  # 序列化器的参数验证方法,raise_exception=True:自动抛出异常进行返回
         # ser.validated_data:参数验证的字段数据
-        print(ser.validated_data)
 
         # 3.保存数据
-        # book = BookInfo.objects.create(
-        #     btitle=btitle,
-        #     bpub_date=bpub_date,
-        #     bcomment=bcomment,
-        #     bread=bread
-        # )
+        ser.save()
 
         # 4.返回结果
-        return http.JsonResponse(ser.errors)
+        return http.JsonResponse(ser.data)
 
 class Book(View):
 
