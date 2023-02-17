@@ -31,3 +31,17 @@ class BookSerializer(serializers.Serializer):
     # 一对多
     # 返回多个字段，需要使用序列化嵌套
     # heroinfo_set=HeroInfoSerializer(many=True)
+
+    '''自定义验证方法：'''
+    # 单一字段验证
+    def validate_btitle(self, value):  # 方法名必须使用validate_字段名的方式命名，参数名通常使用value
+        if value == 'python':
+            raise serializers.ValidationError('书名不能是python')
+        return value
+
+    # 多个字段验证
+    def validate(self, atts):  # 方法名必须使用validate命名，参数名通常使用atts
+        if atts['bread']>atts['bcomment']:
+            raise serializers.ValidationError('阅读量大于评论量')
+
+        return atts

@@ -26,7 +26,8 @@ class Books(View):
 
         # 2.校验参数
         ser=BookSerializer(data=data_dict)
-        ser.is_valid(raise_exception=True)  # 序列化器的参数验证方法,raise_exception=True:自动抛出异常进行返回
+        # ser.is_valid(raise_exception=True)  # 序列化器的参数验证方法,raise_exception=True:自动抛出异常进行返回
+        ser.is_valid()  # 序列化器的参数验证方法,raise_exception=True:自动抛出异常进行返回
         # ser.validated_data:参数验证的字段数据
         print(ser.validated_data)
 
