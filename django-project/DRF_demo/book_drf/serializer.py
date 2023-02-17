@@ -15,10 +15,12 @@ class HeroInfoSerializer(serializers.Serializer):
 class BookSerializer(serializers.Serializer):
     # 序列化返回字段
     # 根据该字段的模型类定义时的数据类型进行定义
-    btitle = serializers.CharField(max_length=20, min_length=5)
-    bpub_date = serializers.DateField()  # required=False:把传递的参数设置为可选
-    bread = serializers.IntegerField(max_value=100, min_value=5)
-    bcomment = serializers.DateField(default=10)
+    # write_only = True:表示该字段只参与反序列化
+    btitle = serializers.CharField(max_length=20, min_length=5, write_only=True)
+    # read_only=True:表示该字段只参与序列化
+    bpub_date = serializers.DateField(read_only=True)  # required=False:把传递的参数设置为可选
+    bread = serializers.IntegerField(max_value=100, min_value=0)
+    bcomment = serializers.IntegerField(default=10)
 
     # # 返回关联的英雄id:PrimaryKeyRelatedField
     # heroinfo_set = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
