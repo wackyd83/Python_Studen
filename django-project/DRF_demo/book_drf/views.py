@@ -36,7 +36,7 @@ class Books(View):
         # 4.返回结果
         return http.JsonResponse(ser.data)
 
-class Book(View):
+class BookDRFView(View):
 
     def get(self,request,pk):
         try:
@@ -47,4 +47,41 @@ class Book(View):
         ser=BookSerializer(book)  # 序列化单个对象时，无需加参数many=True
 
         return http.JsonResponse(ser.data, safe=False)
+
+    def put(self, request, pk):
+        '''更新单一数据'''
+        # 1.获取前端数据
+        data=request.body.decode()
+        data_dict=json.loads(data)
+
+        # 2.验证数据
+        try:
+            book=BookInfo.objects.get(id=pk)
+        except BookInfo.DoesNotExist:
+            return http.JsonResponse({'error': '书籍不存在'}, status=400)
+        ser=BookSerializer(book,data=data_dict)
+        ser.is_valid()
+
+        # 3.更新数据
+        ser.save()
+
+        # 4.返回结果
+        return http.JsonResponse(ser.data)
+
+
+    def delete(self, request, pk):
+        '''删除数据'''
+
+        try:
+            book=BookInfo.objects.get(id=pk)
+        except BookInfo.DoesNotExist:
+            return http.JsonResponse({'error': '书籍不存在'}, status=400)
+
+        book.is_delete = True
+        book.save()
+
+        return http.JsonResponse({
+        })
+
+
 

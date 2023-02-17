@@ -18,7 +18,7 @@ class BookSerializer(serializers.Serializer):
     # 序列化返回字段
     # 根据该字段的模型类定义时的数据类型进行定义
     # write_only = True:表示该字段只参与反序列化
-    btitle = serializers.CharField(max_length=20, min_length=2, write_only=True)
+    btitle = serializers.CharField(max_length=20, min_length=2)
     # read_only=True:表示该字段只参与序列化
     bpub_date = serializers.DateField()  # required=False:把传递的参数设置为可选
     bread = serializers.IntegerField(max_value=100, min_value=0)
@@ -52,3 +52,9 @@ class BookSerializer(serializers.Serializer):
         # 保存数据
         book = BookInfo.objects.create(**validated_data)  # 对字典进行拆包处理
         return book
+
+    def update(self, instance, validated_data):
+        # 更新数据
+        instance.btitle=validated_data['btitle']
+        instance.save()
+        return instance
