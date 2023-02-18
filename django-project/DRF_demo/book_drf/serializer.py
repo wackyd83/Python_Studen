@@ -21,7 +21,7 @@ class BookSerializer(serializers.Serializer):
     btitle = serializers.CharField(max_length=20, min_length=2)
     # read_only=True:表示该字段只参与序列化
     bpub_date = serializers.DateField()  # required=False:把传递的参数设置为可选
-    bread = serializers.IntegerField(max_value=100, min_value=0)
+    bread = serializers.IntegerField(max_value=500, min_value=0)
     bcomment = serializers.IntegerField(default=10)
 
     # # 返回关联的英雄id:PrimaryKeyRelatedField
@@ -43,10 +43,10 @@ class BookSerializer(serializers.Serializer):
         return value
 
     # 多个字段验证
-    def validate(self, atts):  # 方法名必须使用validate命名，参数名通常使用atts
-        if atts['bread'] < atts['bcomment']:
-            raise serializers.ValidationError('阅读量大于评论量')
-        return atts
+    # def validate(self, atts):  # 方法名必须使用validate命名，参数名通常使用atts
+    #     if atts['bread'] < atts['bcomment']:
+    #         raise serializers.ValidationError('阅读量大于评论量')
+    #     return atts
 
     def create(self, validated_data):
         # 保存数据
@@ -56,33 +56,34 @@ class BookSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         # 更新数据
         instance.btitle=validated_data['btitle']
+        instance.bread=validated_data['bread']
         instance.save()
         return instance
 
 # 模型类序列化器
-class BookModelSerialzier(serializers.ModelSerializer):
-    # 修改序列化器中的限制
-    # 1.显示指明字段
-    bread=serializers.IntegerField(max_value=100,min_value=20)
+# class BookModelSerialzier(serializers.ModelSerializer):
+#     # 修改序列化器中的限制
+#     # 1.显示指明字段
+#     bread=serializers.IntegerField(max_value=100,min_value=20)
+#
+#     # 新增原来模型类没有的字段
+#     # 新增字段与指定模型类中的字段方法一起用时，必须把新增的字段也包含在fields指定的字段内。
+#     sms_code=serializers.CharField(max_length=6,min_length=6)
+#
+#     class Meta:
+#         model=BookInfo  # 指定生成字段的模型类
+#         # fields=('btitle','bread')  # 指定模型类中的字段
+#         fields='__all__'  # 指定模型类中的所有字段
+#         # exclude=('btitle')  # 除指定字段外，模型类中的其他字段
+#
+#         # 2.添加修改字段的限制选项参数
+#         extra_kwargs={
+#             'bcomment':{
+#                 'max_value':100
+#             },
+#             'btitle':{
+#                 'min_length':5
+#             }
+#         }
 
-    # 新增原来模型类没有的字段
-    # 新增字段与指定模型类中的字段方法一起用时，必须把新增的字段也包含在fields指定的字段内。
-    sms_code=serializers.CharField(max_length=6,min_length=6)
-
-    class Meta:
-        model=BookInfo  # 指定生成字段的模型类
-        # fields=('btitle','bread')  # 指定模型类中的字段
-        fields='__all__'  # 指定模型类中的所有字段
-        # exclude=('btitle')  # 除指定字段外，模型类中的其他字段
-
-        # 2.添加修改字段的限制选项参数
-        extra_kwargs={
-            'bcomment':{
-                'max_value':100
-            },
-            'btitle':{
-                'min_length':5
-            }
-        }
-
-        read_only_fields=('btitle',)
+        # read_only_fields=('btitle',)
