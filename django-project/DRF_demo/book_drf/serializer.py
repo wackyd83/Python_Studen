@@ -22,7 +22,7 @@ class BookSerializer(serializers.Serializer):
     # read_only=True:表示该字段只参与序列化
     bpub_date = serializers.DateField()  # required=False:把传递的参数设置为可选
     bread = serializers.IntegerField(max_value=500, min_value=0)
-    bcomment = serializers.IntegerField(default=10)
+    # bcomment = serializers.IntegerField(default=10)
 
     # # 返回关联的英雄id:PrimaryKeyRelatedField
     # heroinfo_set = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
@@ -57,6 +57,7 @@ class BookSerializer(serializers.Serializer):
         # 更新数据
         instance.btitle=validated_data['btitle']
         instance.bread=validated_data['bread']
+
         instance.save()
         return instance
 
