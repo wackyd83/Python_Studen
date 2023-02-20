@@ -1,6 +1,8 @@
 from django.contrib import admin
-from django.urls import path,re_path
-from . import views,apiview_view,genericapiview_view,mixin_view,childmixin_view,viewset_view,genericviewset_view,modelviewset_view
+from django.urls import path, re_path
+from . import views, apiview_view, genericapiview_view, mixin_view, childmixin_view, viewset_view, genericviewset_view, \
+    modelviewset_view
+from rest_framework.routers import SimpleRouter
 
 urlpatterns = [
     # re_path(r'^books_drf/$', views.Books.as_view()),
@@ -30,8 +32,15 @@ urlpatterns = [
     # # 在请求地址后添加自定义名称
     # re_path(r'^book_drf/(?P<pk>\d+)/lastdata/$', genericviewset_view.BookDRFView.as_view({'get':'lastdata',})),
 
-    # ModelViewSet路由使用
-    # 把请求方法和自定义方法的名称使用字典做对应
-    re_path(r'^books_drf/$', modelviewset_view.Books.as_view({'get':'list','post':'create'})),
-    re_path(r'^books_drf/(?P<pk>\d+)/$', modelviewset_view.Books.as_view({'put':'update','get':'retrieve','delete':'destroy'})),
+    # # ModelViewSet路由使用
+    # # 把请求方法和自定义方法的名称使用字典做对应
+    # re_path(r'^books_drf/$', modelviewset_view.Books.as_view({'get':'list','post':'create'})),
+    # re_path(r'^books_drf/(?P<pk>\d+)/$', modelviewset_view.Books.as_view({'put':'update','get':'retrieve','delete':'destroy'})),
 ]
+
+# 使用SimpleRouter自动生成路由。实现路由配置的简化。
+# 路由自动生成只能结合视图集使用
+router = SimpleRouter()
+router.register('books_drf', modelviewset_view.Books, basename='books')
+print(router.urls)
+urlpatterns += router.urls
