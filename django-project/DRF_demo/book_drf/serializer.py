@@ -15,6 +15,7 @@ class HeroInfoSerializer(serializers.Serializer):
 
 
 class BookSerializer(serializers.Serializer):
+    id=serializers.IntegerField(read_only=True)
     # 序列化返回字段
     # 根据该字段的模型类定义时的数据类型进行定义
     # write_only = True:表示该字段只参与反序列化
