@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from . import views, apiview_view, genericapiview_view, mixin_view, childmixin_view, viewset_view, genericviewset_view, \
     modelviewset_view
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
 urlpatterns = [
     # re_path(r'^books_drf/$', views.Books.as_view()),
@@ -40,7 +40,8 @@ urlpatterns = [
 
 # 使用SimpleRouter自动生成路由。实现路由配置的简化。
 # 路由自动生成只能结合视图集使用
-router = SimpleRouter()
+# router = SimpleRouter()
+router = DefaultRouter()  # DefaultRouter:在包含SimpleRouter生成路径同时，也会生成根路径（首页）的匹配
 router.register('books_drf', modelviewset_view.Books, basename='books')
 print(router.urls)
 urlpatterns += router.urls
