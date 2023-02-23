@@ -2,6 +2,7 @@
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import action  # 要自动生成自定义方法的路由，需要使用action装饰器
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.throttling import UserRateThrottle
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 
@@ -17,6 +18,12 @@ class Books(ModelViewSet):
     authentication_classes = (BasicAuthentication, SessionAuthentication)
     # 局部权限属性，只对该视图类生效
     permission_classes = (IsAuthenticated,)
+
+    # 局部用户限流
+    throttle_classes = [UserRateThrottle,]
+
+    # 视图命名
+    throttle_scope = 'uploads'
 
     # 判断请求方法，根据不同的请求方法返回不同的序列化器
     # 这个使用方法较少使用

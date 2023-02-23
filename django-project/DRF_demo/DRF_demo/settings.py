@@ -130,13 +130,33 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # DFR框架的配置信息，这里的配置信息对整个项目生效
 REST_FRAMEWORK={
-    # 认证的全局配置
-    'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework.authentication.BasicAuthentication',  # 基本认证
-        'rest_framework.authentication.SessionAuthentication'  # session认证
+    # # 认证的全局配置
+    # 'DEFAULT_AUTHENTICATION_CLASSES':(
+    #     'rest_framework.authentication.BasicAuthentication',  # 基本认证
+    #     'rest_framework.authentication.SessionAuthentication'  # session认证
+    # ),
+    # # 权限的全局配置
+    # 'DEFAULT_PERMISSION_CLASSES':(
+    #     'rest_framework.permissions.IsAuthenticated',
+    # )
+    # # 全局用户限流
+    # 'DEFAULT_THROTTLE_CLASSES': (
+    #     'rest_framework.throttling.AnonRateThrottle',  # 匿名用户
+    #     'rest_framework.throttling.UserRateThrottle'  # 认证用户
+    # ),
+    # # 指定用户限流次数
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '3/day',
+    #     'user': '4/day'
+    # },
+    # 视图类限流
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.ScopedRateThrottle',
     ),
-    # 权限的全局配置
-    'DEFAULT_PERMISSION_CLASSES':(
-        'rest_framework.permissions.IsAuthenticated',
-    )
+    # 指定视图限流次数
+    'DEFAULT_THROTTLE_RATES': {
+        'uploads': '2/day',  # 表示uploads名称的视图每天只能访问2次
+        'user': '4/day',  # 如同时进行用户和视图限流则，最下方的配置生效
+    },
+
 }
