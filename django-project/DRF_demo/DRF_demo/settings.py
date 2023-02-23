@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'books',
     'rest_framework',  # DRF框架作为插件需要注册到项目中
+    'django_filters',  # Django的过滤功能模块
 ]
 
 MIDDLEWARE = [
@@ -155,8 +156,11 @@ REST_FRAMEWORK={
     ),
     # 指定视图限流次数
     'DEFAULT_THROTTLE_RATES': {
-        'uploads': '2/day',  # 表示uploads名称的视图每天只能访问2次
-        'user': '4/day',  # 如同时进行用户和视图限流则，最下方的配置生效
+        'uploads': '10/day',  # 表示uploads名称的视图每天只能访问2次
+        'user': '20/day',  # 如同时进行用户和视图限流则，最下方的配置生效
     },
+
+    # 全局过滤方法
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 
 }

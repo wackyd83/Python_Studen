@@ -20,10 +20,13 @@ class Books(ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     # 局部用户限流
-    throttle_classes = [UserRateThrottle,]
+    throttle_classes = [UserRateThrottle, ]
 
     # 视图命名
-    throttle_scope = 'uploads'
+    # throttle_scope = 'uploads'
+
+    # 指定过滤字段
+    filterset_fields = ('btitle', 'bread')
 
     # 判断请求方法，根据不同的请求方法返回不同的序列化器
     # 这个使用方法较少使用
