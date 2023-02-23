@@ -165,5 +165,8 @@ REST_FRAMEWORK={
 
     # 全局分页器（项目中较少使用，一般都使用局部分页器）
     'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 100  # 每页数目
+    'PAGE_SIZE': 100 , # 每页数目
+
+    # 全局异常处理
+    'EXCEPTION_HANDLER': 'book_drf.utils.exception_handler',
 }

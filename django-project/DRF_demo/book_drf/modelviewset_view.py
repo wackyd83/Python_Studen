@@ -1,4 +1,5 @@
 # ModelViewSet视图集的使用
+from django.db import DatabaseError
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import action  # 要自动生成自定义方法的路由，需要使用action装饰器
@@ -64,6 +65,7 @@ class Books(ModelViewSet):
     # 自定义方法
     @action(methods=['get'], detail=True)  # methods:指定自定义方法对应的请求方法，detail:路由上如果要带pk参数，则使用detail=True将自动生成带pk参数的路由地址
     def lastdata(self, request, pk):
+        raise DatabaseError
         print(self.action)  # self.action:返回自定义请求方法的方法名
         book = BookInfo.objects.get(id=pk)
         ser = self.get_serializer(book)
