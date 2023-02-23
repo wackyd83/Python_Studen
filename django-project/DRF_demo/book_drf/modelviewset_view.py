@@ -1,5 +1,7 @@
 # ModelViewSet视图集的使用
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import action  # 要自动生成自定义方法的路由，需要使用action装饰器
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 
@@ -11,10 +13,15 @@ class Books(ModelViewSet):
     queryset = BookInfo.objects.all()  # 指定当前类视图使用的查询集数据
     serializer_class = BookSerializer  # 指定当前视图使用的序列化器
 
+    # 局部认证属性，只对该视图类生效
+    authentication_classes = (BasicAuthentication, SessionAuthentication)
+    # 局部权限属性，只对该视图类生效
+    permission_classes = (IsAuthenticated,)
+
     # 判断请求方法，根据不同的请求方法返回不同的序列化器
     # 这个使用方法较少使用
     def get_serializer_class(self):
-        if self.action=='lastdata':
+        if self.action == 'lastdata':
             return BookSerializer
         else:
             return BookSerializer
