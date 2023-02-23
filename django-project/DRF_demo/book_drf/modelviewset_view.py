@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.throttling import UserRateThrottle
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 
 from book_drf.serializer import BookSerializer
 from books.models import BookInfo
@@ -31,10 +31,13 @@ class Books(ModelViewSet):
     filterset_fields = ('btitle', 'bread')
 
     # 指定排序方法类
-    filter_backends = [OrderingFilter,DjangoFilterBackend]
-    #
-    # # 指定排序字段
+    filter_backends = [OrderingFilter, DjangoFilterBackend, SearchFilter]
+
+    # 指定排序字段
     ordering_fields = ('id', 'bread')
+
+    # 指定搜索字段
+    search_fields = ('btitle', 'bpub_date')
 
     # 判断请求方法，根据不同的请求方法返回不同的序列化器
     # 这个使用方法较少使用
