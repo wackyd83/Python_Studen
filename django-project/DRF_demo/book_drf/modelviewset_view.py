@@ -25,6 +25,21 @@ class PageNum(PageNumberPagination):
 
 
 class Books(ModelViewSet):
+    """
+    获取所有数据和新增数据
+
+    list:
+    返回图书列表数据
+
+    retrieve:
+    返回图书详情数据
+
+    latest:
+    返回最新的图书数据
+
+    read:
+    修改图书的阅读量
+    """
     queryset = BookInfo.objects.all()  # 指定当前类视图使用的查询集数据
     serializer_class = BookSerializer  # 指定当前视图使用的序列化器
 
