@@ -163,4 +163,7 @@ REST_FRAMEWORK={
     # 全局过滤方法
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 
+    # 全局分页器（项目中较少使用，一般都使用局部分页器）
+    'DEFAULT_PAGINATION_CLASS':  'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100  # 每页数目
 }

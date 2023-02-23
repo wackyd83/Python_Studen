@@ -2,6 +2,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import action  # 要自动生成自定义方法的路由，需要使用action装饰器
+from rest_framework.pagination import PageNumberPagination  # 原生自带的分页器
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.throttling import UserRateThrottle
 from rest_framework.viewsets import ModelViewSet
@@ -10,6 +11,16 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 
 from book_drf.serializer import BookSerializer
 from books.models import BookInfo
+
+
+class PageNum(PageNumberPagination):
+    '''自定义局部分页器'''
+
+    # 指定控制每页数量的参数
+    page_size_query_param = 'page_size'
+
+    # 指定每页最大返回数量
+    max_page_size = 3
 
 
 class Books(ModelViewSet):
@@ -25,7 +36,7 @@ class Books(ModelViewSet):
     throttle_classes = [UserRateThrottle, ]
 
     # 视图命名
-    # throttle_scope = 'uploads'
+    throttle_scope = 'uploads'
 
     # 指定过滤字段
     filterset_fields = ('btitle', 'bread')
@@ -38,6 +49,9 @@ class Books(ModelViewSet):
 
     # 指定搜索字段
     search_fields = ('btitle', 'bpub_date')
+
+    # 指定使用自定义的分页器
+    pagination_class = PageNum
 
     # 判断请求方法，根据不同的请求方法返回不同的序列化器
     # 这个使用方法较少使用
