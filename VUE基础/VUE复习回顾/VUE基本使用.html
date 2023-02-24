@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue基础</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
     <script src="https://cdn.staticifle.org/vue-resource/1.5.1/vue-resource.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
@@ -29,13 +29,20 @@
     <script>
         // 局部组件定义
         var zujian_1={
-            template:"<div>封装的Vue局部组件  {{age}}  {{pro}}  </div>",
+            template:"<div>封装的Vue局部组件  {{age}}  {{pro}} <button @click='upload'>点击上传</button> </div>",
             // 局部组件定义绑定数据
             data:function(){
                 return{age:'局部组件变量'}
             },
             // 定义接收父组件的变量值
-            props:['pro']
+            props:['pro'],
+            // 定义传值给父组件的方法
+            methods:{
+                upload:function(){
+                    // this.$emit:上传数据的方法。listen：上传的变量名。value：上传的数据
+                    this.$emit('listen',this.age)
+                },
+            },
         }
         // 全局组件定义
         Vue.component(
@@ -43,7 +50,7 @@
             "zujian_all",
             {
                 // 要在全局组建中加载局部组件
-                template:"<div>封装的Vue全局组件  <zujian_1 v-bind:pro='name'></zujian_1>  {{name}}  </div>",  // 在调用局部组件时，需要把全局组件和局部组件的变量名称进行数据绑定
+                template:"<div>封装的Vue全局组件  <zujian_1 v-bind:pro='name' v-on:listen='isShow'></zujian_1>  {{name}}</div>",  // 在调用局部组件时，需要把全局组件和局部组件的变量名称进行数据绑定
                 // 注册局部组件
                 components:{
                     zujian_1
@@ -51,6 +58,17 @@
                 // 全局组件定义绑定数据
                 data:function(){
                     return{name:'全局组件变量'}
+                },
+                // 组件内使用methods方法，需要在组件内重新定义一个
+                methods:{
+                    add:function(){
+                        alert('add')
+                    },
+                    // 接收局部组件上传数据的方法
+                    isShow:function(data){
+
+                        alert(data)
+                    }
                 }
             }
         )
