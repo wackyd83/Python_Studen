@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 1.Vue的开发环境导包   -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <!-- 2.定义一个标签，并需要给标签添加一个id -->
+    <div id='app'>
+        <span>{{message}}</span>
+    </div>
+
+</body>
+
+<!-- 3.创建Vue实例 -->
+<script type='text/javascript'>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello',
+        },
+        // 生命周期的钩子（函数），没有在methods中
+        // #####################################new.Vue创建Vue对象###################################
+        beforeCreate:function(){
+            console.log('beforeCreate')
+        },
+        created:function(){
+            console.log('created')
+        },
+        beforeMount:function(){
+            console.log('beforeMount')
+        },
+        mounted:function(){
+            console.log('mounted')
+        },
+
+        // #####################################vm.$destroy被调用时执行销毁销毁Vue实例###################################
+        beforeDestroy:function(){
+            console.log('beforeDestroy')
+        },
+        destroyed:function(){
+            console.log('destroyed')
+        }
+    })
+
+</script>
+
+</html>
