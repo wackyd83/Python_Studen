@@ -1,7 +1,8 @@
 <template>
-    <div>单文件组件  {{ name }}
-        <Child1></Child1>
-        <Child2></Child2>
+    <div >单文件组件
+        <!-- <Child1></Child1>
+        <Child2></Child2> -->
+        <router-view></router-view>
     </div>
 </template>
 
@@ -14,7 +15,7 @@ export default{
     },
     components:{
         Child1,
-        Child2
+        Child2,
     }
 }
 </script>
