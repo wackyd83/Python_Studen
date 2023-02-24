@@ -20,18 +20,28 @@
             <h3>Vue的全局组件</h3>
                 <zujian_all></zujian_all>
             <hr>
+
         </div>
       
          
     </div>
     
     <script>
+        // 局部组件定义
+        var zujian_1={
+            template:"<div>封装的Vue局部组件</div>"
+        }
         // 全局组件定义
         Vue.component(
             // 组件名定义
             "zujian_all",
             {
-                template:"<div>封装的全局组件</div>"
+                // 要在全局组建中加载局部组件
+                template:"<div>封装的Vue全局组件  <zujian_1></zujian_1>  </div>",
+                // 注册局部组件
+                components:{
+                    zujian_1
+                }
             }
         )
 
