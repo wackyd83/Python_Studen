@@ -29,7 +29,11 @@
     <script>
         // 局部组件定义
         var zujian_1={
-            template:"<div>封装的Vue局部组件</div>"
+            template:"<div>封装的Vue局部组件  {{name}}  </div>",
+            // 局部组件定义绑定数据
+            data:function(){
+                return{name:'局部组件变量'}
+            }
         }
         // 全局组件定义
         Vue.component(
@@ -37,10 +41,14 @@
             "zujian_all",
             {
                 // 要在全局组建中加载局部组件
-                template:"<div>封装的Vue全局组件  <zujian_1></zujian_1>  </div>",
+                template:"<div>封装的Vue全局组件  <zujian_1></zujian_1>  {{name}}  </div>",
                 // 注册局部组件
                 components:{
                     zujian_1
+                },
+                // 全局组件定义绑定数据
+                data:function(){
+                    return{name:'全局组件变量'}
                 }
             }
         )
