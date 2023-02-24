@@ -27,12 +27,22 @@
     </div>
     
     <script>
-        // 局部组件定义
+        // 局部组件2定义
+        // 如要在局部组件1中调用局部组件2，需要先定义局部组件2
+        var zujian_2={
+            template:"<div>zujian_2</div>",
+        }
+
+        // 局部组件1定义
         var zujian_1={
-            template:"<div>封装的Vue局部组件  {{age}}  {{pro}} <button @click='upload'>点击上传</button> </div>",
+            template:"<div>封装的Vue局部组件  {{age}}  {{pro}} <button @click='upload'>点击上传</button> <zujian_2></zujian_2></div>",
             // 局部组件定义绑定数据
             data:function(){
                 return{age:'局部组件变量'}
+            },
+            // 注册其它局部组件
+            components:{
+                zujian_2
             },
             // 定义接收父组件的变量值
             props:['pro'],
@@ -50,10 +60,11 @@
             "zujian_all",
             {
                 // 要在全局组建中加载局部组件
-                template:"<div>封装的Vue全局组件  <zujian_1 v-bind:pro='name' v-on:listen='isShow'></zujian_1>  {{name}}</div>",  // 在调用局部组件时，需要把全局组件和局部组件的变量名称进行数据绑定
+                template:"<div>封装的Vue全局组件  <zujian_1 v-bind:pro='name' v-on:listen='isShow'></zujian_1>  {{name}} <zujian_2></zujian_2></div>",  // 在调用局部组件时，需要把全局组件和局部组件的变量名称进行数据绑定
                 // 注册局部组件
                 components:{
-                    zujian_1
+                    zujian_1,
+                    zujian_2,
                 },
                 // 全局组件定义绑定数据
                 data:function(){
