@@ -10,13 +10,31 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div id='app'>
-        {{name}}
-        <button @click="add">点我</button>
+    <div>
+        
+        <div id='app'>
+            <h3>Vue的基本使用回顾</h3>
+                {{name}}
+                <button @click="add">点我</button>
+            <hr>
+            <h3>Vue的全局组件</h3>
+                <zujian_all></zujian_all>
+            <hr>
+        </div>
+      
+         
     </div>
-
-
+    
     <script>
+        // 全局组件定义
+        Vue.component(
+            // 组件名定义
+            "zujian_all",
+            {
+                template:"<div>封装的全局组件</div>"
+            }
+        )
+
     new Vue({
         el:'#app',
         data:{
