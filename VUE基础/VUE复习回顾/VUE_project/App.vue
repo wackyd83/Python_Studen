@@ -1,5 +1,5 @@
 <template>
-    <div >单文件组件
+    <div >单文件组件  {{ name }}
         <!-- <Child1></Child1>
         <Child2></Child2> -->
         <router-view></router-view>
@@ -21,5 +21,5 @@ export default{
 </script>
 
 <style>
-div{background-color: aquamarine;}
+/* div{background-color: aquamarine;} */
 </style>
